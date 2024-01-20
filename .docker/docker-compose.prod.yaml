@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  newbies-web:
+    image: ghcr.io/newbies-workplace/newbies-web:latest
+    restart: unless-stopped
+    container_name: newbies-web
+    ports:
+      - "3000:3000"
