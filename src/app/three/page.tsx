@@ -10,7 +10,7 @@ extend({ OrbitControls });
 
 function Model() {
     const { scene, camera } = useThree();
-    const gltf = useGLTF('borgir.glb', true);
+    const gltf = useGLTF('/model/borgir.glb', true);
 
     useEffect(() => {
         const box = new THREE.Box3().setFromObject(gltf.scene);
@@ -30,7 +30,7 @@ function Model() {
 }
 
 function ControlRoom() {
-    const gltf = useGLTF('control-room2.glb', true);
+    const gltf = useGLTF('/model/control-room.glb', true);
 
     return <primitive object={gltf.scene} dispose={null} />;
 }

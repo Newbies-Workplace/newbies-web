@@ -19,6 +19,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder --chown=nextjs:nodejs /build/.next ./.next
+COPY --from=builder /build/public ./public
 COPY --from=builder /build/next.config.js ./
 COPY --from=builder /build/package.json ./package.json
 COPY --from=builder /build/node_modules ./node_modules
