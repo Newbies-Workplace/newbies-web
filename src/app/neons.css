@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .redNeon {
+    box-shadow: 0px 0px 34.5px 0px #ff4040;
+  }
+
+  .orangeNeon {
+    box-shadow: 0px 0px 34.5px 0px #ffa740;
+  }
+
+  .greenNeon {
+    box-shadow: 0px 0px 34.5px 0px #5bff40;
+  }
+
+  .purpleNeon {
+    box-shadow: 0px 0px 24.312px 0px #8840ff;
+  }
+}
