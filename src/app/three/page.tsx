@@ -11,8 +11,8 @@ extend({ OrbitControls });
 const useCodes = () => {
     const codes = useRef(new Set())
     useEffect(() => {
-        const onKeyDown = (e) => codes.current.add(e.code)
-        const onKeyUp = (e) => codes.current.delete(e.code)
+        const onKeyDown = (e: KeyboardEvent) => codes.current.add(e.code)
+        const onKeyUp = (e: KeyboardEvent) => codes.current.delete(e.code)
         window.addEventListener('keydown', onKeyDown)
         window.addEventListener('keyup', onKeyUp)
         return () => {
@@ -71,16 +71,9 @@ function Video() {
 }
 
 export default function ThreePage() {
-    const lightRef = useRef<THREE.Object3D>();
-
-    useEffect(() => {
-
-        lightRef.current?.lookAt(-13, 10, 0)
-    }, [lightRef]);
-
     return (
         <Canvas className={"flex h-screen w-screen"}>
-            <directionalLight position={[10, 10, 10]} intensity={1} ref={lightRef}/>
+            <directionalLight position={[10, 10, 10]} intensity={1}/>
 
             <OrbitControlsDrei/>
 
