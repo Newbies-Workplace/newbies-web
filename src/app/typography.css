@@ -4,6 +4,14 @@
 @tailwind utilities;
 
 @layer components {
+  .marquee {
+    font-family: Saira;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+  }
+
   .headL {
     font-family: Saira;
     font-size: 64px;
