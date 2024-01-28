@@ -7,7 +7,7 @@ export default function Home() {
         <Marquee
           direction="right"
           speed={65}
-          className="bg-blue-500 *:text-white"
+          className="bg-blue-500 blueNeon *:text-white"
           autoFill
         >
           <p className="mx-3 md:marquee sm:headL font-bold">ŚRODA</p>
@@ -17,7 +17,7 @@ export default function Home() {
         <Marquee
           direction="left"
           speed={65}
-          className="bg-blue-500 *:text-white"
+          className="bg-blue-500 blueNeon *:text-white"
           autoFill
         >
           <p className="mx-3 md:marquee sm:headL font-bold">17:00</p>
@@ -30,7 +30,7 @@ export default function Home() {
         <Marquee
           direction="right"
           speed={65}
-          className="bg-red-500 *:text-white"
+          className="redNeon bg-red-500 *:text-white"
           autoFill
         >
           <p className="mx-3 md:marquee sm:headL font-bold">NASZE PROJEKTY</p>
@@ -43,7 +43,7 @@ export default function Home() {
         <Marquee
           direction="right"
           speed={65}
-          className="bg-orange-500 *:text-white"
+          className="orangeNeon bg-orange-500 *:text-white"
           autoFill
         >
           <p className="mx-3 md:marquee sm:headL font-bold">ZESPÓŁ</p>
@@ -56,7 +56,7 @@ export default function Home() {
         <Marquee
           direction="right"
           speed={65}
-          className="bg-green-500 *:text-white"
+          className="greenNeon bg-green-500 *:text-white"
           autoFill
         >
           <p className="mx-3 md:marquee sm:headL font-bold">MASZ PYTANIA?</p>
