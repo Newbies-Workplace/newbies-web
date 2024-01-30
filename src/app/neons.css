@@ -16,6 +16,10 @@
   }
 
   .purpleNeon {
-    box-shadow: 0px 0px 24.312px 0px #8840ff;
+    box-shadow: 0px 0px 34.5px 0px #8840ff;
+  }
+
+  .blueNeon {
+    box-shadow: 0px 0px 34.5px 0px #307a9a;
   }
 }
