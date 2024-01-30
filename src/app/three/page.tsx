@@ -1,84 +1,78 @@
 'use client'
 
-import {Canvas, extend, useFrame, useThree} from '@react-three/fiber';
-import {useEffect, useRef} from 'react';
-import {useGLTF, OrbitControls as OrbitControlsDrei, Html} from '@react-three/drei';
-import { OrbitControls} from "three-stdlib";
+import {Canvas, useFrame, useThree} from '@react-three/fiber';
+import {useEffect, useRef, useState} from 'react';
+import {useGLTF, Html} from '@react-three/drei';
 import * as THREE from 'three';
 
-extend({ OrbitControls });
+const maxRotationDegrees = 10;
+const smoothness = 0.05;
 
-const useCodes = () => {
-    const codes = useRef(new Set())
+const Camera = () => {
+    const { camera } = useThree();
+    const [mouseX, setMouseX] = useState(window.innerWidth / 2);
+
+
     useEffect(() => {
-        const onKeyDown = (e: KeyboardEvent) => codes.current.add(e.code)
-        const onKeyUp = (e: KeyboardEvent) => codes.current.delete(e.code)
-        window.addEventListener('keydown', onKeyDown)
-        window.addEventListener('keyup', onKeyUp)
-        return () => {
-            window.removeEventListener('keydown', onKeyDown)
-            window.removeEventListener('keyup', onKeyUp)
+        camera.position.set(21,6, 0);
+        camera.lookAt(0, 6, 0);
+        if (camera instanceof THREE.PerspectiveCamera) {
+            camera.fov = 60;
         }
-    }, [])
-    return codes
-}
-
-function Model() {
-    const { scene, camera } = useThree();
-    const gltf = useGLTF('/model/pc.glb', true);
-    const code = useCodes()
+        camera.updateProjectionMatrix();
+    }, [camera]);
 
     useEffect(() => {
-        const box = new THREE.Box3().setFromObject(gltf.scene);
-        const center = box.getCenter(new THREE.Vector3());
+        const onMouseMove = (e: MouseEvent) => {
+            setMouseX(e.clientX);
+        };
+        window.addEventListener('mousemove', onMouseMove);
 
-        camera.position.set(center.x + 30, center.y + 30, center.z + 30);
-        camera.lookAt(center);
-
-        gltf.scene.position.set(0, 0 , 0);
-    }, [gltf, camera]);
+        return () => {
+            window.removeEventListener('mousemove', onMouseMove);
+        };
+    }, []);
 
     useFrame(() => {
-        if (code.current.has('KeyD')) gltf.scene.position.z -= 0.1
-        if  (code.current.has('KeyA'))  gltf.scene.position.z += 0.1;
-        if  (code.current.has('KeyW'))  gltf.scene.position.x -= 0.1;
-        if  (code.current.has('KeyS'))  gltf.scene.position.x += 0.1;
+        const minRotation = THREE.MathUtils.degToRad(-maxRotationDegrees + 90);
+        const maxRotation = THREE.MathUtils.degToRad(maxRotationDegrees + 90);
+
+        const targetRotation = (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) + minRotation;
+
+        camera.rotation.y += (targetRotation - camera.rotation.y) * smoothness;
+        camera.rotation.y = THREE.MathUtils.clamp(camera.rotation.y, minRotation, maxRotation);
     });
 
-    return <primitive object={gltf.scene} dispose={null} />;
-}
+    return null;
+};
 
-function ControlRoom() {
+const ControlRoom = () => {
     const gltf = useGLTF('/model/control-room.glb', true);
 
     return <primitive object={gltf.scene} dispose={null} />;
-}
+};
 
-function Video() {
+const Video = () => {
     const videoRef = useRef<THREE.Object3D>();
-    const videoSrc = "https://www.youtube.com/embed/dQw4w9WgXcQ"; // replace with your YouTube video link
 
+    const videoSrc = "https://newbies.pl"; // replace with your YouTube video link
 
     return <primitive object={{}} dispose={null} ref={videoRef}>
-        <Html distanceFactor={9} transform position={[-13, 10, 0]} rotation={[0, Math.PI/2 ,0]} >
-            <div dangerouslySetInnerHTML={{
-                __html: `
-                        <iframe width="560" height="315" src="${videoSrc}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    `
-            }}/>
+        <Html transform position={[-14.2, 15, 0]} rotation={[0, Math.PI/2 ,0]}>
+            <iframe width="1120" height="710" src={videoSrc}/>
         </Html>
     </primitive>;
-}
+};
 
 export default function ThreePage() {
     return (
         <Canvas className={"flex h-screen w-screen"}>
-            <directionalLight position={[10, 10, 10]} intensity={1}/>
+            <directionalLight position={[13.5, 24.8, -12]} intensity={0.9}/>
+            <directionalLight position={[13.5, 24.8, 12]} intensity={0.9}/>
 
-            <OrbitControlsDrei/>
+            <Camera/>
 
             <ControlRoom/>
-            <Model/>
             <Video/>
         </Canvas>
     );
