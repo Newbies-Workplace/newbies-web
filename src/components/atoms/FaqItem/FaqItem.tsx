@@ -24,7 +24,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answear }) => {
       <div
         className={
           "flex flex-col transition-all origin-top-left " +
-          (isOpened ? "scale-y-100" : "scale-y-0")
+          (isOpened ? "scale-y-100" : "scale-y-0 absolute left-[-999px]")
         }
       >
         <div className="bg-white h-1 rounded-full"></div>
