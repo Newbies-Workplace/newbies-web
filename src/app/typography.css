@@ -6,7 +6,7 @@
 @layer components {
   .marquee {
     font-family: Saira;
-    font-size: 96px;
+    font-size: 80px;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
