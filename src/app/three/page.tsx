@@ -4,17 +4,26 @@ import {Canvas, useFrame, useThree} from '@react-three/fiber';
 import {useEffect, useRef, useState} from 'react';
 import {useGLTF, Html} from '@react-three/drei';
 import * as THREE from 'three';
+import { useSpring, a } from '@react-spring/three';
 
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
-const Camera = () => {
+const Camera = ({isZoomed}: {isZoomed: boolean}) => {
     const { camera } = useThree();
     const [mouseX, setMouseX] = useState(window.innerWidth / 2);
 
+    const zoomedPosition = [4, 15, 0];
+    const unzoomedPosition = [21,6, 0];
+    const vec = new THREE.Vector3();
+
+    const { position } = useSpring({
+        position: isZoomed ? zoomedPosition : unzoomedPosition,
+        config: { mass: 1, tension: 210, friction: 20 },
+    });
 
     useEffect(() => {
-        camera.position.set(21,6, 0);
+        camera.position.set(...unzoomedPosition);
         camera.lookAt(0, 6, 0);
         if (camera instanceof THREE.PerspectiveCamera) {
             camera.fov = 60;
@@ -37,13 +46,19 @@ const Camera = () => {
         const minRotation = THREE.MathUtils.degToRad(-maxRotationDegrees + 90);
         const maxRotation = THREE.MathUtils.degToRad(maxRotationDegrees + 90);
 
-        const targetRotation = (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) + minRotation;
+        console.log(isZoomed)
+        const targetRotation = isZoomed
+            ? THREE.MathUtils.degToRad(90)
+            : (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) + minRotation;
 
         camera.rotation.y += (targetRotation - camera.rotation.y) * smoothness;
         camera.rotation.y = THREE.MathUtils.clamp(camera.rotation.y, minRotation, maxRotation);
+
+        const targetPosition = isZoomed ? zoomedPosition : unzoomedPosition;
+        camera.position.lerp(vec.set(...targetPosition), .008)
     });
 
-    return null;
+    return <a.perspectiveCamera ref={camera} position={position} />;
 };
 
 const ControlRoom = () => {
@@ -65,15 +80,29 @@ const Video = () => {
 };
 
 export default function ThreePage() {
+    const [zoomed, setZoomed] = useState(false);
+
     return (
-        <Canvas className={"flex h-screen w-screen"}>
-            <directionalLight position={[13.5, 24.8, -12]} intensity={0.9}/>
-            <directionalLight position={[13.5, 24.8, 12]} intensity={0.9}/>
+        <div className={"flex h-screen w-screen"}>
+            <Canvas>
+                <directionalLight position={[13.5, 24.8, -12]} intensity={0.9}/>
+                <directionalLight position={[13.5, 24.8, 12]} intensity={0.9}/>
 
-            <Camera/>
+                <Camera isZoomed={zoomed}/>
 
-            <ControlRoom/>
-            <Video/>
-        </Canvas>
+                <ControlRoom/>
+                <Video/>
+            </Canvas>
+
+            <div className={`absolute bottom-8 left-0 right-0 flex justify-center ${zoomed && 'scale-0'}`}>
+                <button
+                    className={"text-white hover:text-black bg-transparent py-1 px-8 rounded-full border-white border-2 hover:shadow-white transition-all hover:bg-white"}
+                    onClick={() => {
+                        setZoomed((z) => !z)
+                    }}>
+                    Cześć!
+                </button>
+            </div>
+        </div>
     );
 }
