@@ -1,8 +1,10 @@
+import ThreePage from "@/app/three/page";
 import Marquee from "react-fast-marquee";
 
 export default function Home() {
   return (
     <main className="w-screen overflow-x-hidden bg-blue-900">
+      <ThreePage />
       <div className="w-[3000px] overflow-hidden pb-5  z-10">
         <Marquee
           direction="right"
@@ -26,7 +28,7 @@ export default function Home() {
       <div className="w-screen h-screen bg-blue-900">
         <p>O NAS</p>
       </div>
-      <div className="w-[3000px] overflow-hidden  z-10">
+      <div className="w-[3000px] overflow-hidden z-10">
         <Marquee
           direction="right"
           speed={65}
