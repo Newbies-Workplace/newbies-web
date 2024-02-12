@@ -3,10 +3,10 @@ import { useState } from "react";
 
 type FaqItemProps = {
   question: string;
-  answear: string;
+  answer: string;
 };
 
-const FaqItem: React.FC<FaqItemProps> = ({ question, answear }) => {
+const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
   const [isOpened, setisOpened] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answear }) => {
         }
       >
         <div className="bg-white h-0.5 rounded-full"></div>
-        <p className="font-bold text-white bodyL">{answear}</p>
+        <p className="font-bold text-white bodyL">{answer}</p>
       </div>
     </div>
   );

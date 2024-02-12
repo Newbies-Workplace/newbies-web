@@ -3,19 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-a {
-  text-decoration: none;
-}
-html,
-h1 {
-  margin: 0;
-}
