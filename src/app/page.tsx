@@ -1,3 +1,4 @@
+import FaqItem from "@/components/atoms/FaqItem/FaqItem";
 import Marquee from "react-fast-marquee";
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
           <p className="mx-3 md:marquee sm:headL font-bold">17:00</p>
         </Marquee>
       </div>
-      <div className="w-screen h-screen bg-blue-900">
+      <div className=" h-screen bg-blue-900">
         <p>O NAS</p>
       </div>
       <div className="w-[3000px] overflow-hidden  z-10">
@@ -36,7 +37,7 @@ export default function Home() {
           <p className="mx-3 md:marquee sm:headL font-bold">NASZE PROJEKTY</p>
         </Marquee>
       </div>
-      <div className="w-screen h-screen bg-red-900">
+      <div className="h-screen bg-red-900">
         <p>Nasze projekty</p>
       </div>
       <div className="w-[3000px] overflow-hidden z-10">
@@ -49,10 +50,10 @@ export default function Home() {
           <p className="mx-3 md:marquee sm:headL font-bold">ZESPÓŁ</p>
         </Marquee>
       </div>
-      <div className="w-screen h-screen bg-orange-900">
+      <div className="h-screen bg-orange-900">
         <p>Zespół</p>
       </div>
-      <div className="w-[3000px] overflow-hidden  z-10">
+      <div className="w-[3000px] overflow-hidden z-10 bg-green-900">
         <Marquee
           direction="right"
           speed={65}
@@ -62,8 +63,12 @@ export default function Home() {
           <p className="mx-3 md:marquee sm:headL font-bold">MASZ PYTANIA?</p>
         </Marquee>
       </div>
-      <div className="w-screen h-screen bg-green-900">
-        <p>Pytania</p>
+      <div className="flex flex-col h-screen bg-green-900 p-5 gap-5">
+        <FaqItem
+          question="Jak dołączyć do nas?"
+          answer="Dołączyć na discorda"
+        />
+        <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
       </div>
     </main>
   );
