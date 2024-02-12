@@ -66,9 +66,9 @@ export default function Home() {
       <div className="flex flex-col h-screen bg-green-900 p-5 gap-5">
         <FaqItem
           question="Jak dołączyć do nas?"
-          answear="Dołączyć na discorda"
+          answer="Dołączyć na discorda"
         />
-        <FaqItem question="Jak wycentrować diva" answear="My też nie wiemy" />
+        <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
       </div>
     </main>
   );
