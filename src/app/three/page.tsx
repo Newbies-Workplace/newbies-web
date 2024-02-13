@@ -81,7 +81,7 @@ const Video = () => {
   return (
     <primitive object={{}} dispose={null} ref={videoRef}>
       <Html transform position={[-14.2, 15, 0]} rotation={[0, Math.PI / 2, 0]}>
-        <iframe width="1120" height="710" src={"."} title={"Web"} />
+        <iframe width="1120" height="710" src={videoSrc} title={"Web"} />
       </Html>
     </primitive>
   );
@@ -89,10 +89,18 @@ const Video = () => {
 
 export default function ThreePage() {
   const [zoomed, setZoomed] = useState(false);
+  const [animationFinished, setAnimationFinished] = useState(false);
   const { opacity } = useSSpring({
     opacity: zoomed ? 0 : 1,
     config: { mass: 5, tension: 280, friction: 80 },
+    onRest: () => {
+      setAnimationFinished(true);
+    },
   });
+
+  if (animationFinished) {
+    return null;
+  }
 
   return (
     <div className={"flex h-screen w-screen"}>

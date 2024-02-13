@@ -7,14 +7,14 @@ type FaqItemProps = {
 };
 
 const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
-  const [isOpened, setisOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
     <div className="border-4 rounded-3xl border-green-500 p-2">
       <div className="flex justify-between items-center">
         <p className="font-bold text-white bodyL">{question}</p>
         <div
-          onClick={() => setisOpened(!isOpened)}
+          onClick={() => setIsOpened(!isOpened)}
           className={`w-7 h-7 rounded-full cursor-pointer ${
             isOpened ? "bg-green-500" : "bg-white"
           }`}

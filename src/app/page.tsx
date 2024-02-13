@@ -5,7 +5,9 @@ import Marquee from "react-fast-marquee";
 export default function Home() {
   return (
     <main className="w-screen overflow-x-hidden bg-blue-900">
-      <ThreePage />
+      <div className={"absolute z-20"}>
+        <ThreePage />
+      </div>
       <div className="w-[3000px] overflow-hidden pb-5  z-10">
         <Marquee
           direction="right"
