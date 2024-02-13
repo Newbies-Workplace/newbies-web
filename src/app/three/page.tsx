@@ -4,6 +4,7 @@ import { a, useSpring } from "@react-spring/three";
 import { Html, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import { animated, useSpring as useSSpring } from "react-spring";
 import * as THREE from "three";
 
 const maxRotationDegrees = 10;
@@ -80,7 +81,7 @@ const Video = () => {
   return (
     <primitive object={{}} dispose={null} ref={videoRef}>
       <Html transform position={[-14.2, 15, 0]} rotation={[0, Math.PI / 2, 0]}>
-        {/*<iframe width="1120" height="710" src={''}/>*/}
+        <iframe width="1120" height="710" src={"."} title={"Web"} />
       </Html>
     </primitive>
   );
@@ -88,18 +89,24 @@ const Video = () => {
 
 export default function ThreePage() {
   const [zoomed, setZoomed] = useState(false);
+  const { opacity } = useSSpring({
+    opacity: zoomed ? 0 : 1,
+    config: { mass: 5, tension: 280, friction: 80 },
+  });
 
   return (
     <div className={"flex h-screen w-screen"}>
-      <Canvas>
-        <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
-        <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
+      <animated.div style={{ opacity }} className={"flex h-screen w-screen"}>
+        <Canvas>
+          <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
+          <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
 
-        <Camera isZoomed={zoomed} />
+          <Camera isZoomed={zoomed} />
 
-        <ControlRoom />
-        <Video />
-      </Canvas>
+          <ControlRoom />
+          <Video />
+        </Canvas>
+      </animated.div>
 
       <div
         className={`absolute bottom-8 left-0 right-0 flex justify-center ${
