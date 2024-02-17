@@ -1,7 +1,7 @@
 "use client";
 
 import { a, useSpring } from "@react-spring/three";
-import { Html, useGLTF } from "@react-three/drei";
+import { Html, ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { animated, useSpring as useSSpring } from "react-spring";
@@ -10,13 +10,18 @@ import * as THREE from "three";
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
-const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
+const Camera = ({
+  isZoomed,
+  zoom,
+}: { isZoomed: boolean; zoom: () => void }) => {
   const { camera } = useThree();
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
 
   const zoomedPosition = [-24, 15, 0];
   const unzoomedPosition = [21, 6, 0];
   const vec = new THREE.Vector3();
+
+  const data = useScroll();
 
   const { position } = useSpring({
     position: isZoomed ? zoomedPosition : unzoomedPosition,
@@ -64,6 +69,15 @@ const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
     camera.position.lerp(vec.set(...targetPosition), 0.008);
   });
 
+  useFrame(() => {
+    const { offset } = data;
+
+    // animate the camera from unzoomed to zoomed
+    if (offset > 0.5) {
+      zoom();
+    }
+  });
+
   return <a.perspectiveCamera ref={camera} position={position} />;
 };
 
@@ -106,13 +120,20 @@ export default function ThreePage() {
     <div className={"flex h-screen w-screen"}>
       <animated.div style={{ opacity }} className={"flex h-screen w-screen"}>
         <Canvas>
-          <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
-          <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
+          <ScrollControls>
+            <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
+            <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
 
-          <Camera isZoomed={zoomed} />
+            <Camera
+              isZoomed={zoomed}
+              zoom={() => {
+                setZoomed(true);
+              }}
+            />
 
-          <ControlRoom />
-          <Video />
+            <ControlRoom />
+            <Video />
+          </ScrollControls>
         </Canvas>
       </animated.div>
 
