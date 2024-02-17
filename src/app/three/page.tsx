@@ -76,7 +76,7 @@ const ControlRoom = () => {
 const Video = () => {
   const videoRef = useRef<THREE.Object3D>();
 
-  const videoSrc = "https://newbies.pl"; // replace with your YouTube video link
+  const videoSrc = "/dvd"; // replace with your YouTube video link
 
   return (
     <primitive object={{}} dispose={null} ref={videoRef}>
