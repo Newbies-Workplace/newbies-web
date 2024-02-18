@@ -1,32 +1,23 @@
 "use client";
 
-import { a, useSpring } from "@react-spring/three";
 import { Html, ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
-import { animated, useSpring as useSSpring } from "react-spring";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 
+const unzoomedPosition = [21, 6, 0];
+const zoomedPosition = [-24, 26, 0];
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
-const Camera = ({
-  isZoomed,
-  zoom,
-}: { isZoomed: boolean; zoom: () => void }) => {
+const lerp = (start: number[], end: number[], t: number) => {
+  return start.map((s, i) => s + (end[i] - s) * t);
+};
+
+const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
   const { camera } = useThree();
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
-
-  const zoomedPosition = [-24, 15, 0];
-  const unzoomedPosition = [21, 6, 0];
-  const vec = new THREE.Vector3();
-
   const data = useScroll();
-
-  const { position } = useSpring({
-    position: isZoomed ? zoomedPosition : unzoomedPosition,
-    config: { mass: 1, tension: 210, friction: 20 },
-  });
 
   useEffect(() => {
     camera.position.set(...unzoomedPosition);
@@ -48,37 +39,34 @@ const Camera = ({
     };
   }, []);
 
-  useFrame(() => {
+  useFrame((state) => {
     const minRotation = THREE.MathUtils.degToRad(-maxRotationDegrees + 90);
     const maxRotation = THREE.MathUtils.degToRad(maxRotationDegrees + 90);
 
-    console.log(isZoomed);
     const targetRotation = isZoomed
       ? THREE.MathUtils.degToRad(90)
       : (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) +
         minRotation;
 
-    camera.rotation.y += (targetRotation - camera.rotation.y) * smoothness;
-    camera.rotation.y = THREE.MathUtils.clamp(
-      camera.rotation.y,
+    state.camera.rotation.y +=
+      (targetRotation - state.camera.rotation.y) * smoothness;
+    state.camera.rotation.y = THREE.MathUtils.clamp(
+      state.camera.rotation.y,
       minRotation,
       maxRotation,
     );
-
-    const targetPosition = isZoomed ? zoomedPosition : unzoomedPosition;
-    camera.position.lerp(vec.set(...targetPosition), 0.008);
   });
 
   useFrame(() => {
-    const { offset } = data;
-
-    // animate the camera from unzoomed to zoomed
-    if (offset > 0.5) {
-      zoom();
-    }
+    const currentPositionBasedOnOffset = lerp(
+      unzoomedPosition,
+      zoomedPosition,
+      data.offset,
+    );
+    camera.position.set(...currentPositionBasedOnOffset);
   });
 
-  return <a.perspectiveCamera ref={camera} position={position} />;
+  return null;
 };
 
 const ControlRoom = () => {
@@ -88,29 +76,34 @@ const ControlRoom = () => {
 };
 
 const Video = () => {
-  const videoRef = useRef<THREE.Object3D>();
+  const scrollData = useScroll();
 
-  const videoSrc = "/dvd"; // replace with your YouTube video link
+  const videoSrc = "/dvd";
 
   return (
-    <primitive object={{}} dispose={null} ref={videoRef}>
-      <Html transform position={[-14.2, 15, 0]} rotation={[0, Math.PI / 2, 0]}>
-        <iframe width="1120" height="710" src={videoSrc} title={"Web"} />
-      </Html>
-    </primitive>
+    <Html
+      transform
+      position={[-14.2, 15, 0]}
+      rotation={[0, Math.PI / 2, 0]}
+      pointerEvents={"none"}
+      portal={{ current: scrollData.fixed }}
+    >
+      <iframe width="1120" height="710" src={videoSrc} title={"Web"} />
+    </Html>
   );
 };
 
 export default function ThreePage() {
   const [zoomed, setZoomed] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
-  const { opacity } = useSSpring({
-    opacity: zoomed ? 0 : 1,
-    config: { mass: 5, tension: 280, friction: 80 },
-    onRest: () => {
-      setAnimationFinished(true);
-    },
-  });
+
+  // const { opacity } = useSSpring({
+  //   opacity: zoomed ? 0 : 1,
+  //   config: { mass: 5, tension: 280, friction: 80 },
+  //   onRest: () => {
+  //     setAnimationFinished(true);
+  //   },
+  // });
 
   if (animationFinished) {
     return null;
@@ -118,24 +111,17 @@ export default function ThreePage() {
 
   return (
     <div className={"flex h-screen w-screen"}>
-      <animated.div style={{ opacity }} className={"flex h-screen w-screen"}>
-        <Canvas>
-          <ScrollControls>
-            <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
-            <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
+      <Canvas>
+        <ScrollControls>
+          <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
+          <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
 
-            <Camera
-              isZoomed={zoomed}
-              zoom={() => {
-                setZoomed(true);
-              }}
-            />
+          <Camera isZoomed={zoomed} />
 
-            <ControlRoom />
-            <Video />
-          </ScrollControls>
-        </Canvas>
-      </animated.div>
+          <ControlRoom />
+          <Video />
+        </ScrollControls>
+      </Canvas>
 
       <div
         className={`absolute bottom-8 left-0 right-0 flex justify-center ${
