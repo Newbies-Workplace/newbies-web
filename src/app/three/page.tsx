@@ -5,13 +5,13 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 
-const unzoomedPosition = [21, 6, 0];
-const zoomedPosition = [-24, 26, 0];
+const unzoomedPosition = new THREE.Vector3(21, 6, 0);
+const zoomedPosition = new THREE.Vector3(-24, 26, 0);
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
-const lerp = (start: number[], end: number[], t: number) => {
-  return start.map((s, i) => s + (end[i] - s) * t);
+const lerp = (start: THREE.Vector3, end: THREE.Vector3, t: number) => {
+  return start.clone().lerp(end, t);
 };
 
 const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
@@ -20,7 +20,7 @@ const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
   const data = useScroll();
 
   useEffect(() => {
-    camera.position.set(...unzoomedPosition);
+    camera.position.copy(unzoomedPosition);
     camera.lookAt(0, 6, 0);
     if (camera instanceof THREE.PerspectiveCamera) {
       camera.fov = 60;
@@ -58,12 +58,12 @@ const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
   });
 
   useFrame(() => {
-    const currentPositionBasedOnOffset = lerp(
+    const positionBasedOnOffset = lerp(
       unzoomedPosition,
       zoomedPosition,
       data.offset,
     );
-    camera.position.set(...currentPositionBasedOnOffset);
+    camera.position.copy(positionBasedOnOffset);
   });
 
   return null;
@@ -112,7 +112,7 @@ export default function ThreePage() {
   return (
     <div className={"flex h-screen w-screen"}>
       <Canvas>
-        <ScrollControls>
+        <ScrollControls maxSpeed={1}>
           <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
           <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
 
