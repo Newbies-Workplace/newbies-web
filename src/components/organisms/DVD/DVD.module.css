@@ -1,10 +1,10 @@
 .vertical {
-    height: 100vh;
+    height: 100%;
     animation: vertical-bounce 7s linear alternate infinite;
 }
 
 .horizontal {
-    width: 100vw;
+    width: 100%;
     animation: horizontal-bounce 8s linear alternate infinite;
 }
 

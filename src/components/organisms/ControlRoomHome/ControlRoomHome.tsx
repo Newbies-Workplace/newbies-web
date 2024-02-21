@@ -1,7 +1,10 @@
 "use client";
 
+import { DVDWrapper } from "@/components/organisms/DVD/DVDWrapper";
+import { scrollAtom } from "@/scrollAtom";
 import { Html, ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 
@@ -57,7 +60,10 @@ const Camera = () => {
     );
   });
 
+  const setScroll = useSetAtom(scrollAtom);
   useFrame(() => {
+    setScroll(data.offset);
+
     const positionBasedOnOffset = lerp(
       unzoomedPosition,
       zoomedPosition,
@@ -78,8 +84,6 @@ const ControlRoom = () => {
 const Video = () => {
   const scrollData = useScroll();
 
-  const videoSrc = "/dvd";
-
   return (
     <Html
       transform
@@ -87,8 +91,9 @@ const Video = () => {
       rotation={[0, Math.PI / 2, 0]}
       pointerEvents={"none"}
       portal={{ current: scrollData.fixed }}
+      style={{ width: 1120, height: 710 }}
     >
-      <iframe width="1120" height="710" src={videoSrc} title={"Web"} />
+      <DVDWrapper width={1120} height={710} />
     </Html>
   );
 };
@@ -129,7 +134,9 @@ export const ControlRoomHome = () => {
         <ScrollControls maxSpeed={1}>
           <Home
             onTVZoomed={() => {
-              setAnimationFinished(true);
+              setTimeout(() => {
+                setAnimationFinished(true);
+              }, 1000);
             }}
           />
         </ScrollControls>

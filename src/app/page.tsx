@@ -8,9 +8,13 @@ export default function Home() {
       <div className={"absolute z-20"}>
         <ControlRoomHome />
       </div>
-      <div className="h-screen bg-[#150DF7] text-white flex justify-center items-center flex-col">
+
+      <div className="h-screen bg-[#2b2e97] text-white flex justify-center items-center flex-col">
         <p>O NAS</p>
         <p>TODO PRZYCISK POWROTU</p>
+        <p>
+          TODO info sugestia o przescrollowanie gdy ktoś zostaje na tej stronie
+        </p>
       </div>
 
       <div className="w-[3000px] overflow-hidden pb-5  z-10">
@@ -36,6 +40,7 @@ export default function Home() {
       <div className=" h-screen bg-blue-900">
         <p>Dołącz</p>
       </div>
+
       <div className="w-[3000px] overflow-hidden  z-10">
         <Marquee
           direction="right"
@@ -49,6 +54,7 @@ export default function Home() {
       <div className="h-screen bg-red-900">
         <p>Nasze projekty</p>
       </div>
+
       <div className="w-[3000px] overflow-hidden z-10">
         <Marquee
           direction="right"
@@ -62,6 +68,7 @@ export default function Home() {
       <div className="h-screen bg-orange-900">
         <p>Zespół</p>
       </div>
+
       <div className="w-[3000px] overflow-hidden z-10 bg-green-900">
         <Marquee
           direction="right"

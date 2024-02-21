@@ -5,10 +5,10 @@ import styles from "./DVD.module.css";
 export const DVD = () => {
   const verticalRef = useRef<HTMLElement>(null);
   const horizontalRef = useRef<HTMLElement>(null);
-  const [color, setColor] = useState("blue");
+  const [color, setColor] = useState("orange");
 
   useEffect(() => {
-    const colors = ["red", "green", "blue", "purple", "orange"];
+    const colors = ["red", "green", "white", "purple", "orange"];
 
     let i = 0;
     const changeColor = () => {
