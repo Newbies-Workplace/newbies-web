@@ -1,5 +1,6 @@
 import Tag from "@/components/atoms/Tag/Tag";
 import Image from "next/image";
+import React from "react";
 
 interface BlogPostProps {
   imgSrc: string;

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import * as THREE from "three";
 
 const unzoomedPosition = new THREE.Vector3(21, 6, 0);
-const zoomedPosition = new THREE.Vector3(-24, 26, 0);
+const zoomedPosition = new THREE.Vector3(-6, 18, 0);
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
@@ -14,7 +14,7 @@ const lerp = (start: THREE.Vector3, end: THREE.Vector3, t: number) => {
   return start.clone().lerp(end, t);
 };
 
-const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
+const Camera = () => {
   const { camera } = useThree();
   const [mouseX, setMouseX] = useState(window.innerWidth / 2);
   const data = useScroll();
@@ -40,13 +40,13 @@ const Camera = ({ isZoomed }: { isZoomed: boolean }) => {
   }, []);
 
   useFrame((state) => {
-    const minRotation = THREE.MathUtils.degToRad(-maxRotationDegrees + 90);
-    const maxRotation = THREE.MathUtils.degToRad(maxRotationDegrees + 90);
+    const interpolatedMaxRotation = maxRotationDegrees * (1 - data.offset);
+    const minRotation = THREE.MathUtils.degToRad(-interpolatedMaxRotation + 90);
+    const maxRotation = THREE.MathUtils.degToRad(interpolatedMaxRotation + 90);
 
-    const targetRotation = isZoomed
-      ? THREE.MathUtils.degToRad(90)
-      : (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) +
-        minRotation;
+    const targetRotation =
+      (1 - mouseX / window.innerWidth) * (maxRotation - minRotation) +
+      minRotation;
 
     state.camera.rotation.y +=
       (targetRotation - state.camera.rotation.y) * smoothness;
@@ -93,17 +93,31 @@ const Video = () => {
   );
 };
 
-export default function ThreePage() {
+export const Home = ({ onTVZoomed }: { onTVZoomed: () => void }) => {
+  const data = useScroll();
+
+  useFrame(() => {
+    if (data.offset > 0.99) {
+      onTVZoomed();
+    }
+  });
+
+  return (
+    <>
+      <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
+      <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
+
+      <Camera />
+
+      <ControlRoom />
+      <Video />
+    </>
+  );
+};
+
+export const ControlRoomHome = () => {
   const [zoomed, setZoomed] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
-
-  // const { opacity } = useSSpring({
-  //   opacity: zoomed ? 0 : 1,
-  //   config: { mass: 5, tension: 280, friction: 80 },
-  //   onRest: () => {
-  //     setAnimationFinished(true);
-  //   },
-  // });
 
   if (animationFinished) {
     return null;
@@ -113,13 +127,11 @@ export default function ThreePage() {
     <div className={"flex h-screen w-screen"}>
       <Canvas>
         <ScrollControls maxSpeed={1}>
-          <directionalLight position={[13.5, 24.8, -12]} intensity={0.9} />
-          <directionalLight position={[13.5, 24.8, 12]} intensity={0.9} />
-
-          <Camera isZoomed={zoomed} />
-
-          <ControlRoom />
-          <Video />
+          <Home
+            onTVZoomed={() => {
+              setAnimationFinished(true);
+            }}
+          />
         </ScrollControls>
       </Canvas>
 
@@ -142,4 +154,4 @@ export default function ThreePage() {
       </div>
     </div>
   );
-}
+};
