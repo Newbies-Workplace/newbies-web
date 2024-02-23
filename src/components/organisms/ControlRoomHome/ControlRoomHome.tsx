@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import * as THREE from "three";
 
 const unzoomedPosition = new THREE.Vector3(21, 6, 0);
-const zoomedPosition = new THREE.Vector3(-6, 18, 0);
+const zoomedPosition = new THREE.Vector3(-6, 15, 0);
 const maxRotationDegrees = 10;
 const smoothness = 0.05;
 
@@ -136,29 +136,29 @@ export const ControlRoomHome = () => {
             onTVZoomed={() => {
               setTimeout(() => {
                 setAnimationFinished(true);
-              }, 1000);
+              }, 500);
             }}
           />
         </ScrollControls>
       </Canvas>
 
-      <div
-        className={`absolute bottom-8 left-0 right-0 flex justify-center ${
-          zoomed && "scale-0"
-        }`}
-      >
-        <button
-          type={"button"}
-          className={
-            "text-white hover:text-black bg-transparent py-1 px-8 rounded-full border-white border-2 hover:shadow-white transition-all hover:bg-white"
-          }
-          onClick={() => {
-            setZoomed((z) => !z);
-          }}
-        >
-          Cześć!
-        </button>
-      </div>
+      {/*<div*/}
+      {/*  className={`absolute bottom-8 left-0 right-0 flex justify-center ${*/}
+      {/*    zoomed && "scale-0"*/}
+      {/*  }`}*/}
+      {/*>*/}
+      {/*  <button*/}
+      {/*    type={"button"}*/}
+      {/*    className={*/}
+      {/*      "text-white hover:text-black bg-transparent py-1 px-8 rounded-full border-white border-2 hover:shadow-white transition-all hover:bg-white"*/}
+      {/*    }*/}
+      {/*    onClick={() => {*/}
+      {/*      setZoomed((z) => !z);*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    Cześć!*/}
+      {/*  </button>*/}
+      {/*</div>*/}
     </div>
   );
 };
