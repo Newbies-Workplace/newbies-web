@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./DVD.module.css";
 
 export const DVD = () => {
-  const verticalRef = useRef<HTMLElement>(null);
-  const horizontalRef = useRef<HTMLElement>(null);
+  const verticalRef = useRef<HTMLDivElement>(null);
+  const horizontalRef = useRef<HTMLDivElement>(null);
   const [color, setColor] = useState("orange");
 
   useEffect(() => {
