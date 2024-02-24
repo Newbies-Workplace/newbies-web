@@ -7,6 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      saira: ["Saira", "sans-serif"],
+    },
     screens: {
       sm: "480px",
       md: "768px",
@@ -87,6 +90,13 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      boxShadow: {
+        "neon-red": "0 0 34px 0 #ff4040",
+        "neon-orange": "0 0 34px 0 #ffa740",
+        "neon-green": "0 0 34px 0 #5bff40",
+        "neon-purple": "0 0 34px 0 #8840ff",
+        "neon-blue": "0 0 34px 0 #307a9a",
       },
     },
   },

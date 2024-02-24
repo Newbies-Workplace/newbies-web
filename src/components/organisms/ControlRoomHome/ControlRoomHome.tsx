@@ -5,7 +5,12 @@ import { scrollAtom } from "@/scrollAtom";
 import { Html, ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useSetAtom } from "jotai";
-import { useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import * as THREE from "three";
 
 const unzoomedPosition = new THREE.Vector3(21, 6, 0);
@@ -141,24 +146,6 @@ export const ControlRoomHome = () => {
           />
         </ScrollControls>
       </Canvas>
-
-      {/*<div*/}
-      {/*  className={`absolute bottom-8 left-0 right-0 flex justify-center ${*/}
-      {/*    zoomed && "scale-0"*/}
-      {/*  }`}*/}
-      {/*>*/}
-      {/*  <button*/}
-      {/*    type={"button"}*/}
-      {/*    className={*/}
-      {/*      "text-white hover:text-black bg-transparent py-1 px-8 rounded-full border-white border-2 hover:shadow-white transition-all hover:bg-white"*/}
-      {/*    }*/}
-      {/*    onClick={() => {*/}
-      {/*      setZoomed((z) => !z);*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    Cześć!*/}
-      {/*  </button>*/}
-      {/*</div>*/}
     </div>
   );
 };
