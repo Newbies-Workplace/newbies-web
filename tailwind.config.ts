@@ -7,15 +7,6 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      saira: ["Saira", "sans-serif"],
-    },
-    screens: {
-      sm: "480px",
-      md: "768px",
-      lg: "976px",
-      xl: "1440px",
-    },
     colors: {
       transparent: "transparent",
       white: "#FFFFFF",
@@ -86,10 +77,9 @@ const config: Config = {
       black: "900",
     },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        saira: ["Saira", "sans-serif"],
+        bluescreen: ["Lucida Console", "Monaco", "monospace"],
       },
       boxShadow: {
         "neon-red": "0 0 34px 0 #ff4040",

@@ -5,12 +5,7 @@ import { scrollAtom } from "@/scrollAtom";
 import { Html, ScrollControls, useGLTF, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useSetAtom } from "jotai";
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import * as THREE from "three";
 
 const unzoomedPosition = new THREE.Vector3(21, 6, 0);
