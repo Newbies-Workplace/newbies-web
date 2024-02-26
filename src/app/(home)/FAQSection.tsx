@@ -2,6 +2,8 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import FaqItem from "@/components/atoms/FaqItem/FaqItem";
 
+// todo back to control room button
+
 export const FaqSection = () => {
   return (
     <div className="min-h-screen bg-green-900 snap-start">
@@ -26,6 +28,7 @@ export const FaqSection = () => {
           answer="Dołączyć na discorda"
         />
         <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
+        <FaqItem question="TODO wsadzić to w kontener" answer="My też nie wiemy" />
       </div>
     </div>
   );
