@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 
 export const JoinUsSection = () => {
   return (
-    <div className="min-h-screen bg-blue-900 snap-start">
+    <div className="min-h-screen bg-blue-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -16,7 +16,6 @@ export const JoinUsSection = () => {
           </p>
         </Marquee>
       </div>
-
       <div className={"-rotate-1 -mx-4"}>
         <Marquee
           direction="left"
@@ -30,7 +29,7 @@ export const JoinUsSection = () => {
         </Marquee>
       </div>
 
-      <p>Dołącz</p>
+      <div className={"m-8 p-4 flex justify-center"}>Dołącz</div>
     </div>
   );
 };

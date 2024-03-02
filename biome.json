@@ -12,7 +12,8 @@
         "useKeyWithClickEvents": "off",
         "useButtonType": "off"
       }
-    }
+    },
+    "ignore": ["tailwind.config.ts"]
   },
   "formatter": {
     "enabled": true,

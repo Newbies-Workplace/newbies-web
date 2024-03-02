@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 
 export const OurProjectsSection = () => {
   return (
-    <div className="min-h-screen bg-red-900 snap-start">
+    <div className="min-h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -17,7 +17,7 @@ export const OurProjectsSection = () => {
         </Marquee>
       </div>
 
-      <p>Nasze projekty</p>
+      <div className={"m-8 p-4 flex justify-center"}>Nasze projekty</div>
     </div>
   );
 };

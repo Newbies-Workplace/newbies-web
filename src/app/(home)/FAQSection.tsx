@@ -6,7 +6,7 @@ import FaqItem from "@/components/atoms/FaqItem/FaqItem";
 
 export const FaqSection = () => {
   return (
-    <div className="min-h-screen bg-green-900 snap-start">
+    <div className="min-h-screen bg-green-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -28,7 +28,10 @@ export const FaqSection = () => {
           answer="Dołączyć na discorda"
         />
         <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
-        <FaqItem question="TODO wsadzić to w kontener" answer="My też nie wiemy" />
+        <FaqItem
+          question="TODO wsadzić to w kontener"
+          answer="My też nie wiemy"
+        />
       </div>
     </div>
   );
