@@ -6,26 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npx @biomejs/biome check --apply ./src",
+    "postinstall": "lefthook install"
   },
   "dependencies": {
     "@react-three/drei": "^9.93.0",
     "@react-three/fiber": "^8.15.14",
+    "@svgr/webpack": "^8.1.0",
     "classnames": "^2.5.1",
+    "jotai": "^2.6.5",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.3",
+    "react-powerglitch": "^1.0.3",
+    "react-spring": "^9.7.3",
     "three": "^0.160.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.5.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/three": "^0.160.0",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "lefthook": "^1.6.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

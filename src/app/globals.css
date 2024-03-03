@@ -1,5 +1,10 @@
-@import "./typography.css";
-@import "./neons.css";
+@import "../typography.css";
+@import "../neons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+    display: none;
+}

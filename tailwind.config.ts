@@ -14,6 +14,7 @@ const config: Config = {
       xl: "1440px",
     },
     colors: {
+      transparent: "transparent",
       white: "#FFFFFF",
       black: "#000000",
       red: {

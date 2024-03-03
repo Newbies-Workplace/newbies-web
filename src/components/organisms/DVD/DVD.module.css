@@ -1,0 +1,27 @@
+.vertical {
+    height: 100%;
+    animation: vertical-bounce 7s linear alternate infinite;
+}
+
+.horizontal {
+    width: 100%;
+    animation: horizontal-bounce 8s linear alternate infinite;
+}
+
+@keyframes vertical-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(calc(100% - 50px));
+    }
+}
+
+@keyframes horizontal-bounce {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(100% - 100px));
+    }
+}
