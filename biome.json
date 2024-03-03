@@ -9,9 +9,11 @@
       "recommended": true,
 
       "a11y": {
-        "useKeyWithClickEvents": "off"
+        "useKeyWithClickEvents": "off",
+        "useButtonType": "off"
       }
-    }
+    },
+    "ignore": ["tailwind.config.ts"]
   },
   "formatter": {
     "enabled": true,
