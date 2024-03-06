@@ -120,8 +120,7 @@ export const Home = ({ onTVZoomed }: { onTVZoomed: () => void }) => {
   );
 };
 
-export const ControlRoomHome = () => {
-  const [zoomed, setZoomed] = useState(false);
+export const ControlRoomHome = ({ onZoom }: { onZoom: () => void }) => {
   const [animationFinished, setAnimationFinished] = useState(false);
 
   if (animationFinished) {
@@ -136,6 +135,7 @@ export const ControlRoomHome = () => {
             onTVZoomed={() => {
               setTimeout(() => {
                 setAnimationFinished(true);
+                onZoom();
               }, 500);
             }}
           />

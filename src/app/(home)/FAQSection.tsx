@@ -27,10 +27,28 @@ export const FaqSection = () => {
           question="Jak do nas dołączyć?"
           answer="Dołączyć na discorda"
         />
-        <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
         <FaqItem
-          question="TODO wsadzić to w kontener"
-          answer="My też nie wiemy"
+          question="Jak wycentrować diva"
+          answer={"Dołączyć na discorda"}
+        />
+        <FaqItem
+          question="Co to jest rekurencja?"
+          answer={
+            <FaqItem
+              question="Co to jest rekurencja?"
+              answer={
+                <FaqItem
+                  question="Co to jest rekurencja?"
+                  answer={
+                    <FaqItem
+                      question="Co to jest rekurencja?"
+                      answer="Właśnie to jest rekurencja!"
+                    />
+                  }
+                />
+              }
+            />
+          }
         />
       </div>
     </div>

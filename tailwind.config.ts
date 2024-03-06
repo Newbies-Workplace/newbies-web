@@ -86,7 +86,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         saira: ["Saira", "sans-serif"],
-        bluescreen: ["Lucida Console", "Monaco", "monospace"],
+        "ubuntu-mono": ["Ubuntu Mono", "monospace"],
       },
       boxShadow: {
         "neon-red": "0 0 34px 0 #ff4040",
@@ -94,6 +94,11 @@ const config: Config = {
         "neon-green": "0 0 34px 0 #5bff40",
         "neon-purple": "0 0 34px 0 #8840ff",
         "neon-blue": "0 0 34px 0 #307a9a",
+      },
+      textShadow: {
+        sm: "0 0 2px var(--tw-shadow-color)",
+        DEFAULT: "0 0 4px var(--tw-shadow-color)",
+        lg: "0 0 16px var(--tw-shadow-color)",
       },
     },
   },
@@ -122,6 +127,16 @@ const config: Config = {
           values: flattenColorPalette(theme("backgroundColor")),
           type: "color",
         },
+      );
+    },
+    ({ matchUtilities, theme }: any) => {
+      matchUtilities(
+        {
+          "text-shadow": (value: any) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow"), type: "color" },
       );
     },
   ],
