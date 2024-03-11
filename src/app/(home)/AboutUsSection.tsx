@@ -10,6 +10,8 @@ type Animation = "error" | "terminal" | "site";
 export const AboutUsSection = () => {
   const [currentAnimation, setCurrentAnimation] = useState<Animation>("error");
 
+  return <SiteSection />
+
   return (
     <>
       {currentAnimation === "error" && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { TerminalStatus } from "@/app/(home)/(about)/TerminalStatus";
+import { TerminalStatus } from "@/app/(home)/(about)/components/TerminalStatus";
 import { delay, random } from "@/utils/anim";
 import banner from "@public/banner.md";
 import { stagger, useAnimate } from "framer-motion";

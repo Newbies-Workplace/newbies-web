@@ -18,6 +18,18 @@ const config: Config = {
       transparent: "transparent",
       white: "#FFFFFF",
       black: "#000000",
+      gray: {
+        50: "#F9FAFB",
+        100: "#F3F4F6",
+        200: "#E5E7EB",
+        300: "#D1D5DB",
+        400: "#9CA3AF",
+        500: "#6B7280",
+        600: "#4B5563",
+        700: "#374151",
+        800: "#1F2937",
+        900: "#111827",
+      },
       red: {
         50: "#FFECED",
         100: "#FFC4C7",
@@ -86,6 +98,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         saira: ["Saira", "sans-serif"],
+        "lucida-console": ["Lucida Console", "Monaco", "monospace"],
         "ubuntu-mono": ["Ubuntu Mono", "monospace"],
       },
       boxShadow: {
