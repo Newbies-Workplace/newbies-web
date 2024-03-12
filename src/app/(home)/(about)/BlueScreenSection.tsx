@@ -1,7 +1,6 @@
 import { delay } from "@/utils/anim";
-import React, { useEffect, useState } from "react";
-import { useGlitch } from "react-powerglitch";
 import RickRollIcon from "@public/icon/rickroll.svg";
+import React, { useEffect, useState } from "react";
 
 interface BlueScreenSection {
   onAnimationEnd?: () => void;
@@ -10,12 +9,9 @@ interface BlueScreenSection {
 export const BlueScreenSection: React.FC<BlueScreenSection> = ({
   onAnimationEnd,
 }) => {
-  // const glitch = useGlitch({ playMode: "manual" });
   const [delayText, setDelayText] = useState("3 seconds...");
 
   const handleAnimation = async () => {
-    // glitch.startGlitch();
-
     await delay(1000);
     setDelayText("2 seconds...");
     await delay(1000);
@@ -27,13 +23,10 @@ export const BlueScreenSection: React.FC<BlueScreenSection> = ({
 
   useEffect(() => {
     handleAnimation().then();
-  }, []);
+  }, [handleAnimation]);
 
   return (
-    <div
-      // ref={glitch.ref}
-      className="min-h-screen bg-[#150DF7] text-white selection:text-[#150DF7] selection:bg-white p-2 md:p-8 font-lucida-console snap-start overflow-hidden"
-    >
+    <div className="min-h-screen bg-[#150DF7] text-white selection:text-[#150DF7] selection:bg-white p-2 md:p-8 font-lucida-console snap-start overflow-hidden">
       <p
         className={
           "bg-white text-[#150DF7] selection:text-white selection:bg-[#150DF7] p-4 w-full font-bold"

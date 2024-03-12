@@ -1,16 +1,23 @@
+import { cn } from "@/utils/cn";
 import React from "react";
 
 interface MacWindowProps {
+  className?: string;
   children: React.ReactNode;
   title: string;
 }
 
-export const MacWindow: React.FC<MacWindowProps> = ({ title, children }) => {
+export const MacWindow: React.FC<MacWindowProps> = ({
+  className,
+  title,
+  children,
+}) => {
   return (
     <div
-      className={
-        "rounded-xl h-full shadow-[0_40px_60px_rgba(0,0,0,0.2),0_0_15px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(0,0,0,0.5)]"
-      }
+      className={cn(
+        "rounded-xl h-full shadow-[0_40px_60px_rgba(0,0,0,0.2),0_0_15px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(0,0,0,0.5)]",
+        className,
+      )}
     >
       <div
         className={
