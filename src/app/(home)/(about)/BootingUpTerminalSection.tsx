@@ -50,9 +50,10 @@ export const BootingUpTerminalSection: React.FC<BootingUpTerminalSectionProps> =
       onAnimationEnd?.();
     };
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: should execute only once
     useEffect(() => {
       handleAnimation().then();
-    }, [handleAnimation]);
+    }, []);
 
     return (
       <div

@@ -21,9 +21,10 @@ export const BlueScreenSection: React.FC<BlueScreenSection> = ({
     onAnimationEnd?.();
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: should execute only once
   useEffect(() => {
     handleAnimation().then();
-  }, [handleAnimation]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#150DF7] text-white selection:text-[#150DF7] selection:bg-white p-2 md:p-8 font-lucida-console snap-start overflow-hidden">

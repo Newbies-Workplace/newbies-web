@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   transpilePackages: ["three"],
   webpack: (config) => {
     config.module.rules.push({
