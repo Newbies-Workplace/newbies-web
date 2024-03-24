@@ -1,9 +1,16 @@
 import { MacWindow } from "@/app/(home)/(about)/components/MacWindow";
 import { delay } from "@/utils/anim";
-import { motion, stagger, useAnimate } from "framer-motion";
+import CursorPointerIcon from "@public/icon/cursor-pointer-icon.svg";
+import DockerIcon from "@public/icon/docker-icon.svg";
+import JSIcon from "@public/icon/js-icon.svg";
+import KotlinIcon from "@public/icon/kotlin-icon.svg";
+import PythonIcon from "@public/icon/python-icon.svg";
+import ReactIcon from "@public/icon/react-icon.svg";
+import { AnimatePresence, motion, stagger, useAnimate } from "framer-motion";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
+// todo skip intro cookie
 export const SiteSection: React.FC = () => {
   const [scope, animate] = useAnimate();
 
@@ -35,7 +42,7 @@ export const SiteSection: React.FC = () => {
   return (
     <div
       ref={scope}
-      className="h-screen w-screen flex justify-center items-center bg-gradient-to-br from-purple-400 to-orange-500 p-2 md:p-8 text-white snap-start overflow-hidden"
+      className="h-screen w-screen flex justify-center items-center bg-gradient-to-br from-purple-400 to-orange-500 p-2 lg:p-8 text-white snap-start overflow-hidden"
     >
       <MacWindow
         className={"mac-window translate-y-[100vh] h-[10%] w-[80%]"}
@@ -56,8 +63,14 @@ export const SiteSection: React.FC = () => {
               height={150}
             />
 
-            <div className={"flex flex-col justify-center gap-4"}>
-              <span className={"text-4xl"}>Newbies</span>
+            <div className={"flex flex-col justify-center"}>
+              <span
+                className={
+                  "text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
+                }
+              >
+                Newbies
+              </span>
               <span className={"text-xl"}>Świdnicka grupa pasjonatów IT</span>
               <span className={"text-xs"}>
                 Powered by&nbsp;
@@ -70,20 +83,72 @@ export const SiteSection: React.FC = () => {
 
           <div
             className={
-              "grid grid-cols-1 md:grid-cols-2 auto-cols-max h-full gap-6 justify-center items-center"
+              "grid grid-cols-1 md:grid-cols-2 auto-cols-max h-full gap-8 justify-center items-center"
             }
           >
-            <Projects />
+            <div
+              className={
+                "staggered opacity-0 relative h-full min-h-[200px] flex flex-col justify-center items-center overflow-hidden bg-red-900 rounded-2xl"
+              }
+            >
+              <Projects />
 
-            <Experience />
+              <span
+                className={
+                  "absolute bottom-0 p-2 text-2xl text-center w-full bg-red-800 bg-opacity-50"
+                }
+              >
+                Uczymy się projektowo
+              </span>
+            </div>
 
-            <Technologies />
+            <div
+              className={
+                "staggered opacity-0 relative h-full min-h-[200px] flex flex-col justify-center items-center overflow-hidden bg-purple-900 rounded-2xl"
+              }
+            >
+              <Experience />
 
-            <Technologies />
-          </div>
+              <span
+                className={
+                  "absolute bottom-0 p-2 text-2xl text-center w-full bg-purple-800 bg-opacity-50"
+                }
+              >
+                Wymieniamy się doświadczeniami
+              </span>
+            </div>
 
-          <div className={"staggered opacity-0 flex flex-row justify-center"}>
-            <span className={"text-2xl"}>Scrollnij se</span>
+            <div
+              className={
+                "staggered opacity-0 relative h-full min-h-[200px] flex flex-col justify-center items-center overflow-hidden bg-blue-900 rounded-2xl"
+              }
+            >
+              <Technologies />
+
+              <span
+                className={
+                  "absolute bottom-0 p-2 text-2xl text-center w-full bg-blue-800 bg-opacity-50"
+                }
+              >
+                Nie straszna nam żadna technologia
+              </span>
+            </div>
+
+            <div
+              className={
+                "staggered opacity-0 relative h-full min-h-[200px] flex flex-col justify-center items-center overflow-hidden bg-green-900 rounded-2xl"
+              }
+            >
+              <ScrollForMore />
+
+              <span
+                className={
+                  "absolute bottom-0 p-2 text-2xl text-center w-full bg-green-800 bg-opacity-50"
+                }
+              >
+                Zejdź niżej aby dowiedzieć się <b>więcej</b>
+              </span>
+            </div>
           </div>
         </div>
       </MacWindow>
@@ -92,88 +157,81 @@ export const SiteSection: React.FC = () => {
 };
 
 const Projects: React.FC = () => {
-  const emotes = [":)", ":o", ">:(", ":D", ":P", ":|"];
+  const emotes = [":)", ":o", ">:(", ":D", ":P", ":|", ":/", ":3", "<3"];
 
   const [currentEmote1, setCurrentEmote1] = useState(emotes[0]);
   const [currentEmote2, setCurrentEmote2] = useState(emotes[0]);
   const [currentEmote3, setCurrentEmote3] = useState(emotes[0]);
 
-  const changeEmote1 = () => {
+  const changeEmote1 = useCallback(() => {
     const otherEmotes = emotes.filter((emote) => emote !== currentEmote1);
     const randomIndex = Math.floor(Math.random() * otherEmotes.length);
     setCurrentEmote1(otherEmotes[randomIndex]);
-  };
+  }, [currentEmote1]);
 
-  const changeEmote2 = () => {
+  const changeEmote2 = useCallback(() => {
     const otherEmotes = emotes.filter((emote) => emote !== currentEmote2);
     const randomIndex = Math.floor(Math.random() * otherEmotes.length);
     setCurrentEmote2(otherEmotes[randomIndex]);
-  };
+  }, [currentEmote2]);
 
-  const changeEmote3 = () => {
+  const changeEmote3 = useCallback(() => {
     const otherEmotes = emotes.filter((emote) => emote !== currentEmote3);
     const randomIndex = Math.floor(Math.random() * otherEmotes.length);
     setCurrentEmote3(otherEmotes[randomIndex]);
-  };
+  }, [currentEmote3]);
 
   return (
-    <div
-      className={
-        "staggered opacity-0 flex flex-col gap-4 justify-center items-center"
-      }
-    >
-      <div className={"flex justify-center items-center"}>
-        <motion.div
-          initial={{
-            rotate: -6,
-          }}
-          whileHover={{
-            translateY: -16,
-            translateX: -4,
-          }}
-          onMouseEnter={changeEmote1}
-          className={
-            "relative flex justify-center items-center hover:shadow-neon-red bg-red-900 -mx-4 size-[120px] border-2 border-red-500 rounded-md"
-          }
-        >
-          <span className={"text-4xl text-red-500 font-bold select-none"}>
-            {currentEmote1}
-          </span>
-        </motion.div>
+    <div className={"flex gap-4 justify-center items-center"}>
+      <motion.div
+        initial={{
+          rotate: -6,
+        }}
+        whileHover={{
+          translateY: -16,
+          translateX: -4,
+        }}
+        onMouseEnter={changeEmote1}
+        className={
+          "relative flex justify-center items-center hover:shadow-neon-red bg-red-800 -mx-4 size-[120px] border-2 border-red-500 rounded-md"
+        }
+      >
+        <span className={"text-4xl text-red-500 font-bold select-none"}>
+          {currentEmote1}
+        </span>
+      </motion.div>
 
-        <motion.div
-          whileHover={{
-            translateY: -20,
-          }}
-          onMouseEnter={changeEmote2}
-          className={
-            "relative flex justify-center items-center hover:shadow-neon-red bg-red-900 -mx-4 mb-4 size-[120px] border-2 border-red-500 rounded-md"
-          }
-        >
-          <span className={"text-4xl text-red-500 font-bold select-none"}>
-            {currentEmote2}
-          </span>
-        </motion.div>
+      <motion.div
+        whileHover={{
+          translateY: -20,
+        }}
+        onMouseEnter={changeEmote2}
+        className={
+          "relative flex justify-center items-center hover:shadow-neon-red bg-red-800 -mx-4 mb-4 size-[120px] border-2 border-red-500 rounded-md"
+        }
+      >
+        <span className={"text-4xl text-red-500 font-bold select-none"}>
+          {currentEmote2}
+        </span>
+      </motion.div>
 
-        <motion.div
-          initial={{
-            rotate: 6,
-          }}
-          whileHover={{
-            translateY: -16,
-            translateX: 4,
-          }}
-          onMouseEnter={changeEmote3}
-          className={
-            "relative flex justify-center items-center hover:shadow-neon-red bg-red-900 -mx-4 size-[120px] border-2 border-red-500 rounded-md"
-          }
-        >
-          <span className={"text-4xl text-red-500 font-bold select-none"}>
-            {currentEmote3}
-          </span>
-        </motion.div>
-      </div>
-      <span className={"text-2xl"}>Uczymy się projektowo</span>
+      <motion.div
+        initial={{
+          rotate: 6,
+        }}
+        whileHover={{
+          translateY: -16,
+          translateX: 4,
+        }}
+        onMouseEnter={changeEmote3}
+        className={
+          "relative flex justify-center items-center hover:shadow-neon-red bg-red-800 -mx-4 size-[120px] border-2 border-red-500 rounded-md"
+        }
+      >
+        <span className={"text-4xl text-red-500 font-bold select-none"}>
+          {currentEmote3}
+        </span>
+      </motion.div>
     </div>
   );
 };
@@ -216,11 +274,7 @@ const Experience: React.FC = () => {
   };
 
   return (
-    <div
-      className={
-        "staggered opacity-0 flex flex-col gap-4 justify-center items-center"
-      }
-    >
+    <div className={"flex flex-col gap-4 justify-center items-center"}>
       <motion.div
         className={"relative flex flex-row gap-16 justify-center items-center"}
         initial={"hidden"}
@@ -243,12 +297,12 @@ const Experience: React.FC = () => {
         <div className={"relative size-[120px]"}>
           <div
             className={
-              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-900 border-2 border-purple-500"
+              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-800 border-2 border-purple-500"
             }
           />
           <div
             className={
-              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-900 border-2 border-purple-500"
+              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-800 border-2 border-purple-500"
             }
           />
         </div>
@@ -256,67 +310,80 @@ const Experience: React.FC = () => {
         <div className={"relative size-[120px]"}>
           <div
             className={
-              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-900 border-2 border-purple-500"
+              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-800 border-2 border-purple-500"
             }
           />
           <div
             className={
-              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-900 border-2 border-purple-500"
+              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-800 border-2 border-purple-500"
             }
           />
         </div>
       </motion.div>
-      <span className={"text-2xl"}>Dzielimy się doświadczeniami</span>
     </div>
   );
 };
 
+const TechIcons = [
+  <ReactIcon key={"react"} width={100} height={100} />,
+  <PythonIcon key={"python"} width={100} height={100} />,
+  <KotlinIcon key={"kotlin"} width={100} height={100} />,
+  <JSIcon key={"js"} width={100} height={100} />,
+  <DockerIcon key={"docker"} width={100} height={100} />,
+];
+
 const Technologies: React.FC = () => {
+  const [currentIcons, setCurrentIcons] = useState(TechIcons);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // shift first element to the end
+      setCurrentIcons((prev) => {
+        const [first, ...rest] = prev;
+        return [...rest, first];
+      });
+    }, 2500);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <div
-      className={
-        "staggered opacity-0 flex flex-col gap-4 justify-center items-center"
-      }
-    >
+    <div className={"flex flex-col gap-4 justify-center items-center"}>
+      <motion.div layout className={"flex gap-4"}>
+        <AnimatePresence>
+          {currentIcons.slice(0, 3).map((icon, index) => (
+            <motion.div
+              layout
+              key={icon.key}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0, transition: { delay: 0.5 } }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
+            >
+              {icon}
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+};
+
+const ScrollForMore: React.FC = () => {
+  return (
+    <div className={"flex flex-col gap-4 justify-center items-center"}>
       <div className={"flex gap-4 justify-center items-center"}>
-        <div className={"relative hover:animate-pulse size-[120px]"}>
-          <div
-            className={
-              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-900 border-2 border-purple-500"
-            }
-          />
-          <div
-            className={
-              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-900 border-2 border-purple-500"
-            }
-          />
-        </div>
-        <div className={"relative hover:animate-pulse size-[120px]"}>
-          <div
-            className={
-              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-900 border-2 border-purple-500"
-            }
-          />
-          <div
-            className={
-              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-900 border-2 border-purple-500"
-            }
-          />
-        </div>
-        <div className={"relative hover:animate-pulse size-[120px]"}>
-          <div
-            className={
-              "head absolute top-0 m-auto left-0 right-0 w-1/2 h-1/2 rounded-full bg-purple-900 border-2 border-purple-500"
-            }
-          />
-          <div
-            className={
-              "body absolute bottom-0 w-full h-1/2 rounded-t-full bg-purple-900 border-2 border-purple-500"
-            }
+        <div className={" animate-bounce"}>
+          <CursorPointerIcon
+            width={100}
+            height={100}
+            color={"#4B983F"}
+            className={"rotate-[165deg]"}
           />
         </div>
       </div>
-      <span className={"text-2xl"}>Nie straszna nam żadna technologia</span>
     </div>
   );
 };
