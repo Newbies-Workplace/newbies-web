@@ -1,8 +1,6 @@
+import FaqItem from "@/components/atoms/FaqItem/FaqItem";
 import React from "react";
 import Marquee from "react-fast-marquee";
-import FaqItem from "@/components/atoms/FaqItem/FaqItem";
-
-// todo back to control room button
 
 export const FaqSection = () => {
   return (

@@ -10,7 +10,6 @@ import { AnimatePresence, motion, stagger, useAnimate } from "framer-motion";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 
-// todo skip intro cookie
 export const SiteSection: React.FC = () => {
   const [scope, animate] = useAnimate();
 
