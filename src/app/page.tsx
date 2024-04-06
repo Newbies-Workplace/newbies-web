@@ -1,91 +1,39 @@
-import FaqItem from "@/components/atoms/FaqItem/FaqItem";
+"use client";
+
+import { AboutUsSection } from "@/app/(home)/AboutUsSection";
+import { FaqSection } from "@/app/(home)/FAQSection";
+import { JoinUsSection } from "@/app/(home)/JoinUsSection";
+import { OurProjectsSection } from "@/app/(home)/OurProjectsSection";
+import { OurTeamSection } from "@/app/(home)/OurTeamSection";
 import { ControlRoomHome } from "@/components/organisms/ControlRoomHome/ControlRoomHome";
-import Marquee from "react-fast-marquee";
+import { useState } from "react";
 
 export default function Home() {
+  const [zoomed, setZoomed] = useState(false);
+
+  const handleZoom = () => {
+    setZoomed(true);
+  };
+
   return (
-    <main className="w-screen overflow-x-hidden bg-blue-900">
-      <div className={"absolute z-20"}>
-        <ControlRoomHome />
+    <main className="w-screen overflow-x-hidden bg-blue-900 snap-y text-white snap-mandatory">
+      <div className={"absolute z-20 bg-black"}>
+        <ControlRoomHome onZoom={handleZoom} />
       </div>
 
-      <div className="h-screen bg-[#2b2e97] text-white flex justify-center items-center flex-col">
-        <p>O NAS</p>
-        <p>TODO PRZYCISK POWROTU</p>
-        <p>
-          TODO info sugestia o przescrollowanie gdy ktoś zostaje na tej stronie
-        </p>
-      </div>
+      {zoomed && (
+        <>
+          <AboutUsSection />
 
-      <div className="w-[3000px] overflow-hidden pb-5  z-10">
-        <Marquee
-          direction="right"
-          speed={65}
-          className="bg-blue-500 blueNeon *:text-white"
-          autoFill
-        >
-          <p className="mx-3 md:marquee sm:headL font-bold">ŚRODA</p>
-        </Marquee>
-      </div>
-      <div className="w-[3000px] overflow-hidden  z-10">
-        <Marquee
-          direction="left"
-          speed={65}
-          className="bg-blue-500 blueNeon *:text-white"
-          autoFill
-        >
-          <p className="mx-3 md:marquee sm:headL font-bold">17:00</p>
-        </Marquee>
-      </div>
-      <div className=" h-screen bg-blue-900">
-        <p>Dołącz</p>
-      </div>
+          <JoinUsSection />
 
-      <div className="w-[3000px] overflow-hidden  z-10">
-        <Marquee
-          direction="right"
-          speed={65}
-          className="redNeon bg-red-500 *:text-white"
-          autoFill
-        >
-          <p className="mx-3 md:marquee sm:headL font-bold">NASZE PROJEKTY</p>
-        </Marquee>
-      </div>
-      <div className="h-screen bg-red-900">
-        <p>Nasze projekty</p>
-      </div>
+          <OurProjectsSection />
 
-      <div className="w-[3000px] overflow-hidden z-10">
-        <Marquee
-          direction="right"
-          speed={65}
-          className="orangeNeon bg-orange-500 *:text-white"
-          autoFill
-        >
-          <p className="mx-3 md:marquee sm:headL font-bold">ZESPÓŁ</p>
-        </Marquee>
-      </div>
-      <div className="h-screen bg-orange-900">
-        <p>Zespół</p>
-      </div>
+          <OurTeamSection />
 
-      <div className="w-[3000px] overflow-hidden z-10 bg-green-900">
-        <Marquee
-          direction="right"
-          speed={65}
-          className="greenNeon bg-green-500 *:text-white"
-          autoFill
-        >
-          <p className="mx-3 md:marquee sm:headL font-bold">MASZ PYTANIA?</p>
-        </Marquee>
-      </div>
-      <div className="flex flex-col h-screen bg-green-900 p-5 gap-5">
-        <FaqItem
-          question="Jak dołączyć do nas?"
-          answer="Dołączyć na discorda"
-        />
-        <FaqItem question="Jak wycentrować diva" answer="My też nie wiemy" />
-      </div>
+          <FaqSection />
+        </>
+      )}
     </main>
   );
 }

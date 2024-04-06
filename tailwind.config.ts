@@ -1,4 +1,11 @@
+/* biome-ignore lint: */
 import type { Config } from "tailwindcss";
+
+const svgToDataUri = require("mini-svg-data-uri");
+
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config: Config = {
   content: [
@@ -7,16 +14,22 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    screens: {
-      sm: "480px",
-      md: "768px",
-      lg: "976px",
-      xl: "1440px",
-    },
     colors: {
       transparent: "transparent",
       white: "#FFFFFF",
       black: "#000000",
+      gray: {
+        50: "#F9FAFB",
+        100: "#F3F4F6",
+        200: "#E5E7EB",
+        300: "#D1D5DB",
+        400: "#9CA3AF",
+        500: "#6B7280",
+        600: "#4B5563",
+        700: "#374151",
+        800: "#1F2937",
+        900: "#111827",
+      },
       red: {
         50: "#FFECED",
         100: "#FFC4C7",
@@ -83,13 +96,74 @@ const config: Config = {
       black: "900",
     },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        saira: ["Saira", "sans-serif"],
+        "lucida-console": ["Lucida Console", "Monaco", "monospace"],
+        "ubuntu-mono": ["Ubuntu Mono", "monospace"],
+      },
+      boxShadow: {
+        "neon-red": "0 0 34px 0 #ff4040",
+        "neon-orange": "0 0 34px 0 #ffa740",
+        "neon-green": "0 0 34px 0 #5bff40",
+        "neon-purple": "0 0 34px 0 #8840ff",
+        "neon-blue": "0 0 34px 0 #307a9a",
+      },
+      textShadow: {
+        sm: "0 0 2px var(--tw-shadow-color)",
+        DEFAULT: "0 0 4px var(--tw-shadow-color)",
+        lg: "0 0 16px var(--tw-shadow-color)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    addVariablesForColors,
+    ({ matchUtilities, theme }: any) => {
+      matchUtilities(
+        {
+          "bg-grid": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
+            )}")`,
+          }),
+          "bg-grid-small": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
+            )}")`,
+          }),
+          "bg-dot": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`,
+            )}")`,
+          }),
+        },
+        {
+          values: flattenColorPalette(theme("backgroundColor")),
+          type: "color",
+        },
+      );
+    },
+    ({ matchUtilities, theme }: any) => {
+      matchUtilities(
+        {
+          "text-shadow": (value: any) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow"), type: "color" },
+      );
+    },
+  ],
 };
+
+function addVariablesForColors({ addBase, theme }: any) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+
 export default config;
