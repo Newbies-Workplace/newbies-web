@@ -26,8 +26,8 @@ const BlogPost: React.FC<BlogPostProps> = ({
           <Tag>PYTHON</Tag>
           <Tag>PYTHON</Tag>
         </div>
-        <p className=" text-white bodyL font-bold">{title}</p>
-        <p className="text-white bodyS">{description}</p>
+        <p className="text-white font-bold">{title}</p>
+        <p className="text-white">{description}</p>
         <p className="self-end text-purple-500 bodyXS">
           {readingTime} min czytania
         </p>
