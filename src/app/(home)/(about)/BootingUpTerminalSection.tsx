@@ -29,7 +29,7 @@ export const BootingUpTerminalSection: React.FC<BootingUpTerminalSectionProps> =
           },
         );
 
-        await delay(random(100, 500));
+        await delay(random(100, 200));
       }
 
       animate(
