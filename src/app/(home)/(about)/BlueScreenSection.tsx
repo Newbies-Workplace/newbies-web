@@ -9,11 +9,9 @@ interface BlueScreenSection {
 export const BlueScreenSection: React.FC<BlueScreenSection> = ({
   onAnimationEnd,
 }) => {
-  const [delayText, setDelayText] = useState("3 seconds...");
+  const [delayText, setDelayText] = useState("2 seconds...");
 
   const handleAnimation = async () => {
-    await delay(1000);
-    setDelayText("2 seconds...");
     await delay(1000);
     setDelayText("1 second...");
     await delay(1000);
