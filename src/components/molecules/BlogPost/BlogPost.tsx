@@ -1,11 +1,11 @@
 import Tag from "@/components/atoms/Tag/Tag";
-import Image from "next/image";
 import React from "react";
 
 interface BlogPostProps {
   imgSrc: string;
   title: string;
   description: string;
+  tags: string[];
   readingTime: number;
 }
 
@@ -13,24 +13,30 @@ const BlogPost: React.FC<BlogPostProps> = ({
   imgSrc,
   title,
   description,
+  tags,
   readingTime,
 }) => {
   return (
-    <div className="flex flex-col items-start gap-1 pt-1 px-2 pb-2 border-2 border-purple-500 rounded-2xl w-[500px] m-2">
-      <Image src={imgSrc} alt="siema taco" className="h-20" />
-      <div className="flex flex-col pt-1 pb-2 self-stretch">
-        <div className="flex gap-1 self-stretch flex-wrap">
-          <Tag>PYTHON</Tag>
-          <Tag>PYTHON</Tag>
-          <Tag>PYTHON</Tag>
-          <Tag>PYTHON</Tag>
-          <Tag>PYTHON</Tag>
-        </div>
+    <div className="flex flex-col items-start gap-2 p-2 border-2 border-purple-500 bg-purple-800 rounded-2xl">
+      <img
+        src={imgSrc}
+        className={"max-h-60 object-cover w-full rounded-xl"}
+        alt={""}
+      />
+
+      <div className="flex gap-1 flex-col self-stretch">
+        {tags.length > 0 && (
+          <div className="flex gap-1 self-stretch flex-wrap">
+            {tags.map((tag) => (
+              <Tag key={tag} text={tag} />
+            ))}
+          </div>
+        )}
+
         <p className="text-white font-bold">{title}</p>
         <p className="text-white">{description}</p>
-        <p className="self-end text-purple-500 bodyXS">
-          {readingTime} min czytania
-        </p>
+
+        <p className="self-end text-purple-400">{readingTime} min czytania</p>
       </div>
     </div>
   );
