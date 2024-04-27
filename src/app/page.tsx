@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   return (
-    <main className="w-screen overflow-x-hidden bg-blue-900 snap-y text-white snap-mandatory">
+    <main className="h-screen w-screen overflow-x-hidden bg-blue-900 snap-y text-white snap-mandatory">
       <div className={"absolute z-20 bg-black"}>
         <ControlRoomHome onZoom={handleZoom} />
       </div>
