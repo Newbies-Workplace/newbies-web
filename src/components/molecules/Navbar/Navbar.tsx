@@ -1,8 +1,9 @@
+import { cn } from "@/utils/cn";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = ({ className }: { className?: string }) => {
   return (
-    <div className={"sticky top-3 px-3 mb-6 w-full"}>
+    <div className={cn("sticky top-3 px-3 mb-6 w-full", className)}>
       <div className="w-full flex items-center justify-between py-1 px-6 bg-black bg-opacity-80 backdrop-blur-sm rounded-full">
         <Link href={"/"}>
           <img
