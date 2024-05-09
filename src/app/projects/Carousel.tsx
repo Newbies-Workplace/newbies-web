@@ -14,9 +14,9 @@ export const Carousel = ({
     setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
 
   return (
-    <div className="relative pl-6 h-full">
+    <div className="relative h-full pl-6 py-8">
       <div
-        className="flex transition-transform ease-out duration-500 pr-6 gap-6 w-[90%]"
+        className="flex h-full transition-transform ease-out duration-500 pr-6 gap-6 w-[90%]"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
         {slides}

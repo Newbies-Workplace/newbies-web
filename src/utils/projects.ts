@@ -8,6 +8,11 @@ export type ProjectMetadata = {
   summary: string;
   tags: string[];
   image?: string;
+  links?: {
+    url: string;
+    title: string;
+    icon?: string;
+  }[];
 };
 
 export type Project = {

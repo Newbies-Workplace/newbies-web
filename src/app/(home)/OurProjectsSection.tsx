@@ -22,11 +22,13 @@ export const OurProjectsSection = () => {
         </Marquee>
       </div>
 
-      <Carousel>
-        {projects.map((project) => (
-          <ProjectCard project={project} key={project.slug} />
-        ))}
-      </Carousel>
+      <div className={"h-[calc(100vh-24px)] md:h-[calc(100vh-64px)] pb-4"}>
+        <Carousel>
+          {projects.map((project) => (
+            <ProjectCard project={project} key={project.slug} />
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
 };
