@@ -1,4 +1,6 @@
 import { Project } from "@/utils/projects";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import md from "markdown-it";
 import React from "react";
 
@@ -33,8 +35,12 @@ export const ProjectCard = ({ project }: { project: Project }) => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={"text-sm text-white bg-red-500 px-2 py-1 rounded-md"}
+            className={
+              "flex gap-2 items-center text-sm text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md"
+            }
           >
+            <FontAwesomeIcon icon={faLink} />
+
             {link.title}
           </a>
         ))}
