@@ -45,5 +45,7 @@ function getMDXProject(dir: string): Project[] {
 }
 
 export function getProjects() {
-  return getMDXProject(path.join(process.cwd(), "content", "projects"));
+  return getMDXProject(
+    path.join(process.cwd(), "public", "content", "projects"),
+  );
 }
