@@ -8,7 +8,7 @@ export const OurProjectsSection = () => {
   const projects = getProjects();
 
   return (
-    <div className="min-h-screen h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start">
+    <div className="min-h-screen h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start flex flex-col">
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -22,12 +22,18 @@ export const OurProjectsSection = () => {
         </Marquee>
       </div>
 
-      <div className={"h-[calc(100vh-24px)] md:h-[calc(100vh-64px)] pb-4"}>
-        <Carousel>
-          {projects.map((project) => (
-            <ProjectCard project={project} key={project.slug} />
-          ))}
-        </Carousel>
+      <div
+        className={
+          "flex flex-col items-center h-[calc(100vh-24px)] md:h-[calc(100vh-64px)] pb-4"
+        }
+      >
+        <div className={"h-full w-full max-w-[1200px]"}>
+          <Carousel>
+            {projects.map((project) => (
+              <ProjectCard project={project} key={project.slug} />
+            ))}
+          </Carousel>
+        </div>
       </div>
     </div>
   );

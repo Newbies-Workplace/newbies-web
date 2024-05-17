@@ -8,7 +8,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div
       className={
-        "flex flex-col sm:flex-row sm:overflow-auto overflow-scroll gap-4 min-w-full text-white"
+        "flex flex-col sm:flex-row sm:overflow-auto overflow-y-scroll gap-4 min-w-full text-white"
       }
     >
       <div className={"flex flex-col gap-4 min-w-[200px]"}>
@@ -38,7 +38,6 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         {/*  <div className={"w-full h-1 rounded bg-red-500"} />*/}
         {/*</div>*/}
 
-        {/* todo github link / web link */}
         {project.data.links?.map((link) => (
           <a
             key={link.url}
@@ -61,7 +60,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           {project.data.title}
         </div>
 
-        <div className={"flex flex-col gap-2 overflow-scroll"}>
+        <div className={"flex flex-col gap-2 overflow-y-scroll"}>
           {project.data.summary && <div>{project.data.summary}</div>}
 
           <div
