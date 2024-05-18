@@ -7,10 +7,10 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-
       "a11y": {
         "useKeyWithClickEvents": "off",
-        "useButtonType": "off"
+        "useButtonType": "off",
+        "noSvgWithoutTitle": "off"
       }
     },
     "ignore": ["tailwind.config.ts"]
