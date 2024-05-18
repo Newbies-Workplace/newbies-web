@@ -42,6 +42,8 @@ export const Carousel = ({
       >
         {slides.map((slide, index) => (
           <div
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            key={index}
             className={cn(
               "flex flex-col min-w-full transition-opacity ease-out duration-500",
               curr !== index && "opacity-50",

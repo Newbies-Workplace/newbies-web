@@ -96,6 +96,9 @@ const config: Config = {
       black: "900",
     },
     extend: {
+      aspectRatio: {
+        "2/3": "2 / 3",
+      },
       fontFamily: {
         saira: ["Saira", "sans-serif"],
         "lucida-console": ["Lucida Console", "Monaco", "monospace"],
