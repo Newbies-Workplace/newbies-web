@@ -23,15 +23,17 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
     }
 
     const { clientHeight, clientWidth } = cardDiv;
+    const boundingBox = cardDiv.getBoundingClientRect();
 
-    const x = e.pageX - cardDiv.offsetLeft - clientWidth / 2;
-    const y = e.pageY - cardDiv.offsetTop - clientHeight / 2;
+    const x = e.pageX - boundingBox.left - clientWidth / 2;
+    const y = e.pageY - boundingBox.top - clientHeight / 2;
 
     const rotationX = (x / clientWidth) * 20;
     const rotationY = (y / clientHeight) * 20;
 
     setRotation({ x: rotationX, y: rotationY });
   };
+
   const onMouseLeave = () => {
     const cardDiv = cardRef.current;
     if (!cardDiv) {
@@ -45,7 +47,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
     return {
       transform: `perspective(700px) rotateY(calc(${rotation.x} * 1deg)) rotateX(calc(${rotation.y} * -1deg))`,
     };
-  }, [rotation]);
+  }, [rotation.x, rotation.y]);
 
   return (
     <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
@@ -53,7 +55,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
         ref={cardRef}
         style={cardStyles}
         className={
-          "relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 shadow-neon-orange overflow-hidden"
+          "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 shadow-neon-orange overflow-hidden"
         }
       >
         <img

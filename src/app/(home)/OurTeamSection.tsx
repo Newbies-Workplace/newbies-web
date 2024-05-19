@@ -1,5 +1,6 @@
 "use client";
 
+import { CardDeck } from "@/components/molecules/TeamCard/CardDeck";
 import { TeamCard } from "@/components/molecules/TeamCard/TeamCard";
 import React from "react";
 import Marquee from "react-fast-marquee";
@@ -20,12 +21,11 @@ export const OurTeamSection = () => {
         </Marquee>
       </div>
 
-      <div className={"m-8 p-4 flex justify-center gap-4"}>
+      <CardDeck>
         <TeamCard img={"image/placeholder.png"} name={"Wiktor"} />
         <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
-        <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
-        <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
-      </div>
+        <TeamCard img={"image/placeholder.png"} name={"Oskar"} />
+      </CardDeck>
     </div>
   );
 };
