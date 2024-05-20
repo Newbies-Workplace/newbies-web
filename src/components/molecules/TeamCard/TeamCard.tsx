@@ -64,19 +64,18 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
           "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-in-out overflow-hidden"
         }
       >
-        <img
-          className={"size-full pointer-events-none"}
-          alt={`Zdjęcie ${name}`}
-          src={img}
-        />
-
-        {/*todo fix holo gradient*/}
         <div
           style={hologramStyle}
           className={cn(
             styles.hologram,
-            "absolute bg-center bg-cover size-full opacity-10 z-10",
+            "absolute bg-center bg-cover size-full opacity-10",
           )}
+        />
+
+        <img
+          className={"size-full pointer-events-none"}
+          alt={`Zdjęcie ${name}`}
+          src={img}
         />
 
         <div
