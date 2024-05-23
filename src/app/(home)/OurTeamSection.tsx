@@ -21,11 +21,18 @@ export const OurTeamSection = () => {
         </Marquee>
       </div>
 
-      <CardDeck>
-        <TeamCard img={"image/placeholder.png"} name={"Wiktor"} />
-        <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
-        <TeamCard img={"image/placeholder.png"} name={"Oskar"} />
-      </CardDeck>
+      <div className={"h-full flex flex-col justify-evenly items-center"}>
+        <CardDeck>
+          <TeamCard img={"image/placeholder.png"} name={"Wiktor"} />
+          <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
+          <TeamCard img={"image/placeholder.png"} name={"Oskar"} />
+          <TeamCard img={"image/placeholder.png"} name={"Rafał"} />
+        </CardDeck>
+
+        <button className={"px-4 py-2 bg-orange-800 rounded"}>
+          Stwórz swoją kartę
+        </button>
+      </div>
     </div>
   );
 };
