@@ -18,36 +18,40 @@ export const FaqSection = () => {
         </Marquee>
       </div>
 
-      <div
-        className={"flex flex-col justify-center items-center gap-4 py-8 px-4"}
-      >
-        <FaqItem
-          question="Jak do nas dołączyć?"
-          answer="Dołączyć na discorda"
-        />
-        <FaqItem
-          question="Jak wycentrować diva"
-          answer={"Dołączyć na discorda"}
-        />
-        <FaqItem
-          question="Co to jest rekurencja?"
-          answer={
-            <FaqItem
-              question="Co to jest rekurencja?"
-              answer={
-                <FaqItem
-                  question="Co to jest rekurencja?"
-                  answer={
-                    <FaqItem
-                      question="Co to jest rekurencja?"
-                      answer="Właśnie to jest rekurencja!"
-                    />
-                  }
-                />
-              }
-            />
+      <div className={"w-full flex flex-col justify-center items-center"}>
+        <div
+          className={
+            "container flex flex-col justify-center items-center gap-4 py-8 px-4"
           }
-        />
+        >
+          <FaqItem
+            question="Jak do nas dołączyć?"
+            answer="Dołączyć na discorda"
+          />
+          <FaqItem
+            question="Jak wycentrować diva"
+            answer={"Dołączyć na discorda"}
+          />
+          <FaqItem
+            question="Co to jest rekurencja?"
+            answer={
+              <FaqItem
+                question="Co to jest rekurencja?"
+                answer={
+                  <FaqItem
+                    question="Co to jest rekurencja?"
+                    answer={
+                      <FaqItem
+                        question="Co to jest rekurencja?"
+                        answer="Właśnie to jest rekurencja!"
+                      />
+                    }
+                  />
+                }
+              />
+            }
+          />
+        </div>
       </div>
     </div>
   );

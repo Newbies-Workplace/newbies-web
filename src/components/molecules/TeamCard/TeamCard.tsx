@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { Portal } from "next/dist/client/portal";
 import React, {
   CSSProperties,
   MouseEventHandler,
@@ -6,17 +7,39 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { Tooltip } from "react-tooltip";
 import styles from "./TeamCard.module.css";
 
 interface TeamCardProps {
   img: string;
   name: string;
+  level: number;
+  stats?: {
+    hp: number;
+    mana: number;
+  };
+  technologies: {
+    tooltip: string;
+    img: string;
+  }[];
+  achievements: {
+    tooltip: string;
+    img: string;
+  }[];
 }
 
-export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
+export const TeamCard: React.FC<TeamCardProps> = ({
+  img,
+  name,
+  level,
+  stats,
+  technologies,
+  achievements,
+}) => {
   const cardRef = createRef<HTMLDivElement>();
 
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hologramStyle, setHologramStyle] = useState<CSSProperties>({});
 
   const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -28,15 +51,18 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
     const { clientHeight, clientWidth } = cardDiv;
     const boundingBox = cardDiv.getBoundingClientRect();
 
-    const x = e.pageX - boundingBox.left - clientWidth / 2;
-    const y = e.pageY - boundingBox.top - clientHeight / 2;
+    const x = e.pageX - boundingBox.left;
+    const y = e.pageY - boundingBox.top;
+    const transformX = x - clientWidth / 2;
+    const transformY = y - clientHeight / 2;
 
-    const rotationX = (x / clientWidth) * 20;
-    const rotationY = (y / clientHeight) * 20;
+    const rotationX = (transformX / clientWidth) * 20;
+    const rotationY = (transformY / clientHeight) * 20;
 
+    setPosition({ x, y });
     setRotation({ x: rotationX, y: rotationY });
     setHologramStyle({
-      backgroundPosition: `${-x}px ${-y}px`,
+      backgroundPosition: `${-transformX}px ${-transformY}px`,
     });
   };
 
@@ -46,14 +72,27 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
       return;
     }
 
+    setPosition({ x: 0, y: 0 });
     setRotation({ x: 0, y: 0 });
   };
 
   const cardStyles: CSSProperties = useMemo(() => {
     return {
       transform: `perspective(700px) rotateY(calc(${rotation.x} * 1deg)) rotateX(calc(${rotation.y} * -1deg))`,
+      transition: "transform 0.1s ease-out",
     };
   }, [rotation.x, rotation.y]);
+
+  const holoStyles: CSSProperties = useMemo(() => {
+    return {
+      mixBlendMode: "color-dodge",
+      filter: "brightness(0.7) contrast(1.5) saturate(1)",
+      backgroundSize: "120% 120%, 200% 200%, cover",
+      backgroundPosition: "center center",
+      backgroundBlendMode: "soft-light, difference",
+      backgroundImage: `radial-gradient(circle at ${position.x}px ${position.y}px, #fff 5%, #000 50%, #fff 80%), linear-gradient(-45deg, #000 15%, #fff, #000 85%), url(/image/card-holo.webp)`,
+    };
+  }, [position.x, position.y]);
 
   return (
     <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
@@ -61,14 +100,22 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
         ref={cardRef}
         style={cardStyles}
         className={
-          "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-in-out overflow-hidden"
+          "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-out duration-100 overflow-hidden font-jetbrains-mono"
         }
       >
         <div
           style={hologramStyle}
           className={cn(
+            "absolute origin-center w-[300%] h-[300%] -translate-x-2/4 -translate-y-2/4 left-[50%] top-[50%] opacity-10",
             styles.hologram,
-            "absolute bg-center bg-cover size-full opacity-10",
+          )}
+        />
+
+        <div
+          style={holoStyles}
+          className={cn(
+            styles.hologram,
+            "absolute bg-center bg-cover size-full opacity-20",
           )}
         />
 
@@ -80,10 +127,88 @@ export const TeamCard: React.FC<TeamCardProps> = ({ img, name }) => {
 
         <div
           className={
-            "absolute rounded-md bottom-2 left-2 right-2 bg-orange-900/90 p-3"
+            "absolute rounded-md bottom-2 left-2 right-2 flex flex-col gap-2 bg-orange-900/80 p-3"
           }
         >
-          {name}
+          <div className={"self-center"}>
+            <span className={"font-bold text-xl"}>{name}</span>
+            <span className={"ml-2 text-xs"}>lvl {level}</span>
+          </div>
+
+          <div className={"flex flex-row w-full gap-2"}>
+            <div className={"w-full"}>
+              <span className={"text-sm"}>Życie</span>
+              <div className={"w-full h-1.5 rounded bg-orange-700"}>
+                <div
+                  className={"h-full rounded bg-orange-500"}
+                  style={{ width: `${stats?.hp}%` }}
+                />
+              </div>
+            </div>
+            <div className={"w-full"}>
+              <span className={"text-sm"}>Mana</span>
+              <div className={"w-full h-1.5 rounded bg-orange-700"}>
+                <div
+                  className={"h-full rounded bg-orange-500"}
+                  style={{ width: `${stats?.mana}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {technologies && technologies.length > 0 && (
+            <div>
+              <span className={"text-sm"}>Ekwipunek</span>
+              <div className={"flex flex-row flex-wrap gap-2"}>
+                {technologies?.map((tech, i) => (
+                  <div
+                    key={tech.tooltip}
+                    data-tooltip-id={`technology-tooltip-${name}-${i}`}
+                  >
+                    <img
+                      className={"bg-orange-500 rounded size-10"}
+                      alt={`Ikona technologii ${tech.tooltip}`}
+                      src={tech.img}
+                    />
+                    <Portal type={"root"}>
+                      <Tooltip
+                        id={`technology-tooltip-${name}-${i}`}
+                        content={tech.tooltip}
+                        place={"bottom"}
+                      />
+                    </Portal>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {achievements && achievements.length > 0 && (
+            <div>
+              <span className={"text-sm"}>Osiągnięcia</span>
+              <div className={"flex flex-row flex-wrap gap-2"}>
+                {achievements?.map((ach, i) => (
+                  <div
+                    key={ach.tooltip}
+                    data-tooltip-id={`achievement-tooltip-${name}-${i}`}
+                  >
+                    <img
+                      className={"bg-orange-500 rounded-full size-12"}
+                      alt={`Ikona osiągnięcia ${ach.tooltip}`}
+                      src={ach.img}
+                    />
+                    <Portal type={"root"}>
+                      <Tooltip
+                        id={`achievement-tooltip-${name}-${i}`}
+                        content={ach.tooltip}
+                        place={"bottom"}
+                      />
+                    </Portal>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

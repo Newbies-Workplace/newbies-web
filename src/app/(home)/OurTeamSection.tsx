@@ -21,17 +21,67 @@ export const OurTeamSection = () => {
         </Marquee>
       </div>
 
-      <div className={"h-full flex flex-col justify-evenly items-center"}>
-        <CardDeck>
-          <TeamCard img={"image/placeholder.png"} name={"Wiktor"} />
-          <TeamCard img={"image/placeholder.png"} name={"Kamil"} />
-          <TeamCard img={"image/placeholder.png"} name={"Oskar"} />
-          <TeamCard img={"image/placeholder.png"} name={"Rafał"} />
-        </CardDeck>
+      <div
+        className={"w-full h-full flex flex-col justify-center items-center"}
+      >
+        <div
+          className={
+            "h-full container flex flex-col justify-evenly items-center"
+          }
+        >
+          <CardDeck>
+            <TeamCard
+              img={"image/placeholder.png"}
+              name={"Wiktor"}
+              level={23}
+              stats={{ hp: 20, mana: 70 }}
+              achievements={[
+                { tooltip: "Zwycięstwo", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+                { tooltip: "Porażka", img: "image/placeholder.png" },
+              ]}
+              technologies={[
+                {
+                  tooltip: "React",
+                  img: "image/placeholder.png",
+                },
+              ]}
+            />
+            <TeamCard
+              img={"image/placeholder.png"}
+              name={"Kamil"}
+              level={23}
+              stats={{ hp: 20, mana: 70 }}
+              achievements={[
+                { tooltip: "Zwycięstwo", img: "image/placeholder.png" },
+              ]}
+              technologies={[
+                {
+                  tooltip: "React",
+                  img: "image/placeholder.png",
+                },
+              ]}
+            />
+            <TeamCard
+              img={"image/placeholder.png"}
+              name={"Kamil"}
+              level={23}
+              stats={{ hp: 20, mana: 70 }}
+              achievements={[]}
+              technologies={[]}
+            />
+          </CardDeck>
 
-        <button className={"px-4 py-2 bg-orange-800 rounded"}>
-          Stwórz swoją kartę
-        </button>
+          <button className={"px-4 py-2 bg-orange-800 rounded"}>
+            Stwórz swoją kartę
+          </button>
+        </div>
       </div>
     </div>
   );
