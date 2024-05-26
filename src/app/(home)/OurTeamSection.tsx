@@ -2,6 +2,7 @@
 
 import { CardDeck } from "@/components/molecules/TeamCard/CardDeck";
 import { TeamCard } from "@/components/molecules/TeamCard/TeamCard";
+import { teamMembers } from "@public/content/members/members";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
@@ -30,52 +31,9 @@ export const OurTeamSection = () => {
           }
         >
           <CardDeck>
-            <TeamCard
-              img={"image/placeholder.png"}
-              name={"Wiktor"}
-              level={23}
-              stats={{ hp: 20, mana: 70 }}
-              achievements={[
-                { tooltip: "Zwycięstwo", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-                { tooltip: "Porażka", img: "image/placeholder.png" },
-              ]}
-              technologies={[
-                {
-                  tooltip: "React",
-                  img: "image/placeholder.png",
-                },
-              ]}
-            />
-            <TeamCard
-              img={"image/placeholder.png"}
-              name={"Kamil"}
-              level={23}
-              stats={{ hp: 20, mana: 70 }}
-              achievements={[
-                { tooltip: "Zwycięstwo", img: "image/placeholder.png" },
-              ]}
-              technologies={[
-                {
-                  tooltip: "React",
-                  img: "image/placeholder.png",
-                },
-              ]}
-            />
-            <TeamCard
-              img={"image/placeholder.png"}
-              name={"Kamil"}
-              level={23}
-              stats={{ hp: 20, mana: 70 }}
-              achievements={[]}
-              technologies={[]}
-            />
+            {teamMembers.map((member) => (
+              <TeamCard key={member.name} member={member} />
+            ))}
           </CardDeck>
 
           <button className={"px-4 py-2 bg-orange-800 rounded"}>

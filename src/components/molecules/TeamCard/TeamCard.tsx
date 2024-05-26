@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { TeamMember } from "@public/content/members/members";
 import { Portal } from "next/dist/client/portal";
 import React, {
   CSSProperties,
@@ -11,30 +12,11 @@ import { Tooltip } from "react-tooltip";
 import styles from "./TeamCard.module.css";
 
 interface TeamCardProps {
-  img: string;
-  name: string;
-  level: number;
-  stats?: {
-    hp: number;
-    mana: number;
-  };
-  technologies: {
-    tooltip: string;
-    img: string;
-  }[];
-  achievements: {
-    tooltip: string;
-    img: string;
-  }[];
+  member: TeamMember;
 }
 
 export const TeamCard: React.FC<TeamCardProps> = ({
-  img,
-  name,
-  level,
-  stats,
-  technologies,
-  achievements,
+  member: { img, name, level, stats, technologies, achievements },
 }) => {
   const cardRef = createRef<HTMLDivElement>();
 
@@ -132,10 +114,10 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         >
           <div className={"self-center"}>
             <span className={"font-bold text-xl"}>{name}</span>
-            <span className={"ml-2 text-xs"}>lvl {level}</span>
+            <span className={"hidden sm:inline ml-2 text-xs"}>lvl {level}</span>
           </div>
 
-          <div className={"flex flex-row w-full gap-2"}>
+          <div className={"hidden sm:flex flex-row w-full gap-2"}>
             <div className={"w-full"}>
               <span className={"text-sm"}>Życie</span>
               <div className={"w-full h-1.5 rounded bg-orange-700"}>
@@ -157,23 +139,23 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           </div>
 
           {technologies && technologies.length > 0 && (
-            <div>
+            <div className={"hidden md:block"}>
               <span className={"text-sm"}>Ekwipunek</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
                 {technologies?.map((tech, i) => (
                   <div
-                    key={tech.tooltip}
+                    key={tech.name}
                     data-tooltip-id={`technology-tooltip-${name}-${i}`}
                   >
                     <img
-                      className={"bg-orange-500 rounded size-10"}
-                      alt={`Ikona technologii ${tech.tooltip}`}
+                      className={"bg-orange-500 rounded size-6 xl:size-10"}
+                      alt={`Ikona technologii ${tech.name}`}
                       src={tech.img}
                     />
                     <Portal type={"root"}>
                       <Tooltip
                         id={`technology-tooltip-${name}-${i}`}
-                        content={tech.tooltip}
+                        content={tech.name}
                         place={"bottom"}
                       />
                     </Portal>
@@ -184,7 +166,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           )}
 
           {achievements && achievements.length > 0 && (
-            <div>
+            <div className={"hidden md:block"}>
               <span className={"text-sm"}>Osiągnięcia</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
                 {achievements?.map((ach, i) => (
@@ -193,7 +175,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                     data-tooltip-id={`achievement-tooltip-${name}-${i}`}
                   >
                     <img
-                      className={"bg-orange-500 rounded-full size-12"}
+                      className={"bg-orange-500 rounded-full size-8 xl:size-12"}
                       alt={`Ikona osiągnięcia ${ach.tooltip}`}
                       src={ach.img}
                     />
