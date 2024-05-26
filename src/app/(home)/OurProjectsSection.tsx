@@ -8,7 +8,7 @@ export const OurProjectsSection = () => {
   const projects = getProjects();
 
   return (
-    <div className="min-h-screen h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start flex flex-col">
+    <div className="min-h-dvh h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start flex flex-col">
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"

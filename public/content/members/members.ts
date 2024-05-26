@@ -43,7 +43,7 @@ export const teamMembers: TeamMember[] = [
       mana: 70,
     },
     technologies: [technologies.react],
-    achievements: [achievements.hackathon2021, achievements.hackathon2021],
+    achievements: [achievements.hackathon2021],
   },
   {
     name: "Kamil",
@@ -54,7 +54,7 @@ export const teamMembers: TeamMember[] = [
       mana: 20,
     },
     technologies: [technologies.react],
-    achievements: [achievements.hackathon2021, achievements.hackathon2021],
+    achievements: [achievements.hackathon2021],
   },
   {
     name: "Oskar",

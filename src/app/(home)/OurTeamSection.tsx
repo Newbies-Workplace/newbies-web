@@ -8,7 +8,7 @@ import Marquee from "react-fast-marquee";
 
 export const OurTeamSection = () => {
   return (
-    <div className="min-h-screen bg-orange-900 bg-dot-white/[0.2] relative snap-start">
+    <div className="min-h-dvh bg-orange-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"-rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -35,10 +35,6 @@ export const OurTeamSection = () => {
               <TeamCard key={member.name} member={member} />
             ))}
           </CardDeck>
-
-          <button className={"px-4 py-2 bg-orange-800 rounded"}>
-            Stwórz swoją kartę
-          </button>
         </div>
       </div>
     </div>

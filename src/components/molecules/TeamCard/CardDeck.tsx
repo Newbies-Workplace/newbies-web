@@ -17,7 +17,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ degree = 3, children }) => {
             : index - Math.floor(totalChildren / 2);
 
         const move =
-          Math.abs(indexFromCenter) < 1 ? 5 : Math.abs(indexFromCenter) * 8;
+          Math.abs(indexFromCenter) < 1 ? 5 : Math.abs(indexFromCenter) * 15;
 
         return (
           <div

@@ -7,6 +7,7 @@ import React, {
   createRef,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 import { Tooltip } from "react-tooltip";
 import styles from "./TeamCard.module.css";
@@ -23,6 +24,46 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hologramStyle, setHologramStyle] = useState<CSSProperties>({});
+
+  useEffect(() => {
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      const { beta, gamma } = event;
+
+      if (beta === null || gamma === null) {
+        return;
+      }
+
+      const normalize = (value: number) => {
+        const maxDegree = 15;
+        if (value > maxDegree) {
+          return maxDegree;
+        }
+
+        if (value < -maxDegree) {
+          return -maxDegree;
+        }
+
+        return value;
+      };
+
+      const rotationX = normalize(gamma);
+      const rotationY = normalize(beta);
+
+      setRotation({ x: rotationX, y: rotationY });
+    };
+
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", handleOrientation, true);
+
+      return () => {
+        window.removeEventListener(
+          "deviceorientation",
+          handleOrientation,
+          true,
+        );
+      };
+    }
+  }, []);
 
   const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
     const cardDiv = cardRef.current;
@@ -113,7 +154,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           }
         >
           <div className={"self-center"}>
-            <span className={"font-bold text-xl"}>{name}</span>
+            <span className={"font-bold text-xl select-none"}>{name}</span>
             <span className={"hidden sm:inline ml-2 text-xs"}>lvl {level}</span>
           </div>
 
