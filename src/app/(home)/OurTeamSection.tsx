@@ -1,9 +1,14 @@
+"use client";
+
+import { CardDeck } from "@/components/molecules/TeamCard/CardDeck";
+import { TeamCard } from "@/components/molecules/TeamCard/TeamCard";
+import { teamMembers } from "@public/content/members/members";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
 export const OurTeamSection = () => {
   return (
-    <div className="min-h-screen bg-orange-900 bg-dot-white/[0.2] relative snap-start">
+    <div className="min-h-dvh bg-orange-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"-rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -17,7 +22,21 @@ export const OurTeamSection = () => {
         </Marquee>
       </div>
 
-      <div className={"m-8 p-4 flex justify-center"}>Zespół</div>
+      <div
+        className={"w-full h-full flex flex-col justify-center items-center"}
+      >
+        <div
+          className={
+            "h-full container flex flex-col justify-evenly items-center"
+          }
+        >
+          <CardDeck>
+            {teamMembers.map((member) => (
+              <TeamCard key={member.name} member={member} />
+            ))}
+          </CardDeck>
+        </div>
+      </div>
     </div>
   );
 };
