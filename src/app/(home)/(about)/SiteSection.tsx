@@ -158,8 +158,8 @@ export const SiteSection: React.FC = () => {
 const Projects: React.FC = () => {
   const emotes = [":)", ":o", ">:(", ":D", ":P", ":|", ":/", ":3", "<3"];
 
-  const [currentEmote1, setCurrentEmote1] = useState(emotes[0]);
-  const [currentEmote2, setCurrentEmote2] = useState(emotes[0]);
+  const [currentEmote1, setCurrentEmote1] = useState(emotes[4]);
+  const [currentEmote2, setCurrentEmote2] = useState(emotes[2]);
   const [currentEmote3, setCurrentEmote3] = useState(emotes[0]);
 
   const changeEmote1 = useCallback(() => {

@@ -33,8 +33,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         return;
       }
 
-      const normalize = (value: number) => {
-        const maxDegree = 15;
+      const normalize = (value: number, maxDegree: number) => {
         if (value > maxDegree) {
           return maxDegree;
         }
@@ -46,10 +45,18 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         return value;
       };
 
-      const rotationX = normalize(gamma);
-      const rotationY = normalize(beta);
+      const rotationX = normalize(gamma, 15);
+      const rotationY = normalize(beta, 15);
 
       setRotation({ x: rotationX, y: rotationY });
+
+      const x = normalize(gamma, 10) * 10;
+      const y = normalize(beta, 10) * 10;
+
+      setPosition({ x: x, y: y });
+      setHologramStyle({
+        backgroundPosition: `${-x}px ${-y}px`,
+      });
     };
 
     if (window.DeviceOrientationEvent) {
