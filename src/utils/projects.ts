@@ -37,7 +37,7 @@ function getMDXProject(dir: string): Project[] {
     const slug = path.basename(file, path.extname(file));
 
     return {
-      data,
+      data: data as ProjectMetadata,
       slug,
       content,
     };
