@@ -1,9 +1,21 @@
-import React from "react";
+"use client";
+
+import { cn } from "@/utils/cn";
+import React, { useEffect, useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
 
 export const JoinUsSection = () => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
   return (
-    <div className="min-h-dvh bg-blue-900 bg-dot-white/[0.2] relative snap-start">
+    <div
+      className="min-h-dvh bg-blue-900 bg-dot-white/[0.2] relative snap-start"
+      onMouseMove={onMouseMove}
+    >
       <div className={"rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -29,7 +41,139 @@ export const JoinUsSection = () => {
         </Marquee>
       </div>
 
-      <div className={"m-8 p-4 flex justify-center"}>Dołącz</div>
+      <div
+        className={"w-full h-full flex flex-col justify-center items-center"}
+      >
+        <div
+          className={
+            "h-full container flex flex-col justify-evenly items-center"
+          }
+        >
+          <div
+            className={
+              "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center"
+            }
+          >
+            <p>Spotykamy się w (prawie) każdą środę o 17:00 na Discordzie</p>
+
+            <a
+              href={"https://discord.gg/u9tuJWkXYg"}
+              target={"_blank"}
+              className={
+                "bg-blue-500 text-white p-2 rounded-lg shadow-neon-blue mt-4"
+              }
+              rel="noreferrer"
+            >
+              Dołącz do nas! 🎉
+            </a>
+          </div>
+
+          <Eyes
+            className="absolute top-60 left-10"
+            mousePos={mousePos}
+            sizeMultiplier={1.5}
+          />
+          <Eyes
+            className="absolute top-40 right-20"
+            mousePos={mousePos}
+            sizeMultiplier={1.2}
+          />
+          <Eyes
+            className="absolute bottom-20 left-30"
+            mousePos={mousePos}
+            sizeMultiplier={1.8}
+          />
+          <Eyes
+            className="absolute bottom-10 right-40"
+            mousePos={mousePos}
+            sizeMultiplier={1.1}
+          />
+        </div>
+      </div>
     </div>
+  );
+};
+
+const Eyes = ({
+  className,
+  mousePos,
+  sizeMultiplier = 1,
+}: {
+  className?: string;
+  mousePos: { x: number; y: number };
+  sizeMultiplier?: number;
+}) => {
+  const eyeSize = 32 * sizeMultiplier;
+
+  return (
+    <div className={cn("flex flex-row", className)}>
+      <div
+        style={{
+          width: eyeSize,
+          height: eyeSize * 2,
+        }}
+        className="rounded-full flex justify-center items-center bg-white border-black border-2 p-1 overflow-hidden"
+      >
+        <Eyeball sizeMultiplier={sizeMultiplier} mousePos={mousePos} />
+      </div>
+      <div
+        style={{
+          width: eyeSize,
+          height: eyeSize * 2,
+        }}
+        className="-ml-2 z-10 rounded-full flex justify-center items-center bg-white border-black border-2 p-1 overflow-hidden"
+      >
+        <Eyeball sizeMultiplier={sizeMultiplier} mousePos={mousePos} />
+      </div>
+    </div>
+  );
+};
+
+const Eyeball = ({
+  sizeMultiplier = 1,
+  mousePos,
+  className,
+}: {
+  sizeMultiplier?: number;
+  mousePos: { x: number; y: number };
+  className?: string;
+}) => {
+  const eyeBallSize = 18 * sizeMultiplier;
+
+  const ref = useRef<HTMLDivElement>(null);
+  const [styles, setStyles] = useState({});
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    let x = mousePos.x - centerX;
+    let y = mousePos.y - centerY;
+
+    const radius = rect.width / 2;
+    const distance = Math.sqrt(x * x + y * y);
+    if (distance > radius) {
+      x *= radius / distance;
+      y *= radius / distance;
+    }
+
+    setStyles({
+      transform: `translate(${x}px, ${y}px)`,
+    });
+  }, [mousePos]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: eyeBallSize,
+        height: eyeBallSize * 2,
+        ...styles,
+      }}
+      className={cn(className, "w-4 h-8 rounded-full bg-black")}
+    />
   );
 };
