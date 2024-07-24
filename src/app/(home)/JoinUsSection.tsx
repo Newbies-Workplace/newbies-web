@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
 
@@ -68,26 +69,45 @@ export const JoinUsSection = () => {
             </a>
           </div>
 
-          <Eyes
-            className="absolute top-60 left-10"
-            mousePos={mousePos}
-            sizeMultiplier={1.5}
-          />
-          <Eyes
-            className="absolute top-40 right-20"
-            mousePos={mousePos}
-            sizeMultiplier={1.2}
-          />
-          <Eyes
-            className="absolute bottom-20 left-30"
-            mousePos={mousePos}
-            sizeMultiplier={1.8}
-          />
-          <Eyes
-            className="absolute bottom-10 right-40"
-            mousePos={mousePos}
-            sizeMultiplier={1.1}
-          />
+          <motion.div
+            initial={{ top: 5 }}
+            whileInView={{ top: 240 }}
+            transition={{ duration: 1.3 }}
+            viewport={{ once: true }}
+            className="absolute left-10"
+          >
+            <Eyes mousePos={mousePos} sizeMultiplier={1.5} />
+          </motion.div>
+
+          <motion.div
+            initial={{ top: 5 }}
+            whileInView={{ top: 160 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="absolute right-20"
+          >
+            <Eyes mousePos={mousePos} sizeMultiplier={1.2} />
+          </motion.div>
+
+          <motion.div
+            initial={{ bottom: 220 }}
+            whileInView={{ bottom: 80 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="absolute left-30"
+          >
+            <Eyes mousePos={mousePos} sizeMultiplier={1.8} />
+          </motion.div>
+
+          <motion.div
+            initial={{ bottom: 160 }}
+            whileInView={{ bottom: 40 }}
+            transition={{ duration: 1.2 }}
+            viewport={{ once: true }}
+            className="absolute right-40"
+          >
+            <Eyes mousePos={mousePos} sizeMultiplier={1.8} />
+          </motion.div>
         </div>
       </div>
     </div>
@@ -100,7 +120,10 @@ const Eyes = ({
   sizeMultiplier = 1,
 }: {
   className?: string;
-  mousePos: { x: number; y: number };
+  mousePos: {
+    x: number;
+    y: number;
+  };
   sizeMultiplier?: number;
 }) => {
   const eyeSize = 32 * sizeMultiplier;
