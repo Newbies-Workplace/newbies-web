@@ -1,4 +1,4 @@
-import { MacWindow } from "@/app/(home)/(about)/components/MacWindow";
+import { MacWindow } from "@/components/molecules/MacWindow/MacWindow";
 import { delay } from "@/utils/anim";
 import CursorPointerIcon from "@public/icon/cursor-pointer-icon.svg";
 import DockerIcon from "@public/icon/docker-icon.svg";

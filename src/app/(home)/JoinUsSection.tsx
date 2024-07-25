@@ -1,5 +1,6 @@
 "use client";
 
+import { MacWindow } from "@/components/molecules/MacWindow/MacWindow";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
@@ -52,29 +53,40 @@ export const JoinUsSection = () => {
         >
           <div
             className={
-              "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center"
+              "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center w-full p-4 z-20"
             }
           >
-            <p>Spotykamy się w (prawie) każdą środę o 17:00 na Discordzie</p>
+            <MacWindow title={"📅 Kiedy?"}>
+              <div
+                className={
+                  "flex flex-col justify-center items-center gap-6 p-4"
+                }
+              >
+                <p>Spotykamy się w każdą* środę o 17:00 na Discordzie</p>
+                <a
+                  href={"https://discord.gg/u9tuJWkXYg"}
+                  target={"_blank"}
+                  className={
+                    "bg-blue-500 text-white p-2 rounded-lg shadow-neon-blue"
+                  }
+                  rel="noreferrer"
+                >
+                  Dołącz do nas! 🎉
+                </a>
 
-            <a
-              href={"https://discord.gg/u9tuJWkXYg"}
-              target={"_blank"}
-              className={
-                "bg-blue-500 text-white p-2 rounded-lg shadow-neon-blue mt-4"
-              }
-              rel="noreferrer"
-            >
-              Dołącz do nas! 🎉
-            </a>
+                <p className={"text-xs text-gray-300"}>
+                  * z wyjątkiem dni w których się nie spotykamy 😅
+                </p>
+              </div>
+            </MacWindow>
           </div>
 
           <motion.div
             initial={{ top: 5 }}
-            whileInView={{ top: 240 }}
+            whileInView={{ top: 220 }}
             transition={{ duration: 1.3 }}
             viewport={{ once: true }}
-            className="absolute left-10"
+            className="absolute sm:left-10 left-1"
           >
             <Eyes mousePos={mousePos} sizeMultiplier={1.5} />
           </motion.div>
@@ -84,7 +96,7 @@ export const JoinUsSection = () => {
             whileInView={{ top: 160 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="absolute right-20"
+            className="absolute sm:right-20 right-3"
           >
             <Eyes mousePos={mousePos} sizeMultiplier={1.2} />
           </motion.div>
@@ -94,7 +106,7 @@ export const JoinUsSection = () => {
             whileInView={{ bottom: 80 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="absolute left-30"
+            className="absolute sm:left-30 left-10"
           >
             <Eyes mousePos={mousePos} sizeMultiplier={1.8} />
           </motion.div>
@@ -104,7 +116,7 @@ export const JoinUsSection = () => {
             whileInView={{ bottom: 40 }}
             transition={{ duration: 1.2 }}
             viewport={{ once: true }}
-            className="absolute right-40"
+            className="absolute sm:right-40 right-4"
           >
             <Eyes mousePos={mousePos} sizeMultiplier={1.8} />
           </motion.div>
