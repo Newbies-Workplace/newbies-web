@@ -62,7 +62,16 @@ export const JoinUsSection = () => {
                   "flex flex-col justify-center items-center gap-6 p-4"
                 }
               >
-                <p>Spotykamy się w każdą* środę o 17:00 na Discordzie</p>
+                <div className={"space-y-2 space-x-4"}>
+                  <p>Spotykamy się w każdą* środę o 17:00 na Discordzie:</p>
+                  <ul className={"list-disc"}>
+                    <li>Przeglądamy nasze kody</li>
+                    <li>Przeprowadzamy review</li>
+                    <li>Śmieszkujemy i kradniemy memy</li>
+                    <li>Dzielimy się pomysłami na projekty</li>
+                  </ul>
+                </div>
+
                 <a
                   href={"https://discord.gg/u9tuJWkXYg"}
                   target={"_blank"}
@@ -71,11 +80,11 @@ export const JoinUsSection = () => {
                   }
                   rel="noreferrer"
                 >
-                  Dołącz do nas! 🎉
+                  Wpadnij do nas
                 </a>
 
                 <p className={"text-xs text-gray-300"}>
-                  * z wyjątkiem dni w których się nie spotykamy 😅
+                  * z wyjątkiem śród w których się nie spotykamy 😅
                 </p>
               </div>
             </MacWindow>
