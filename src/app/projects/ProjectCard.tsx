@@ -1,10 +1,16 @@
+"use client";
+
+import { useMDXComponents } from "@/mdx-components";
 import { Project } from "@/utils/projects";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import md from "markdown-it";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React from "react";
 
-export const ProjectCard = ({ project }: { project: Project }) => {
+export const ProjectCard = ({
+  project,
+  content,
+}: { project: Project; content?: MDXRemoteSerializeResult }) => {
   return (
     <div
       className={
@@ -63,10 +69,14 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         <div className={"flex flex-col gap-2 overflow-y-scroll"}>
           {project.data.summary && <div>{project.data.summary}</div>}
 
-          <div
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-            dangerouslySetInnerHTML={{ __html: md().render(project.content) }}
-          />
+          {/*<MDXProvider components={components}>*/}
+          {/*  <div*/}
+          {/*    // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>*/}
+          {/*    dangerouslySetInnerHTML={{ __html: md().render(project.content) }}*/}
+          {/*  />*/}
+          {/*</MDXProvider>*/}
+
+          <MDXRemote {...content} components={useMDXComponents} />
         </div>
       </div>
     </div>

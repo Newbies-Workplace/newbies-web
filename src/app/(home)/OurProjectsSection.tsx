@@ -1,11 +1,17 @@
 import { Carousel } from "@/app/projects/Carousel";
 import { ProjectCard } from "@/app/projects/ProjectCard";
 import { getProjects } from "@/utils/projects";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-export const OurProjectsSection = () => {
+export const OurProjectsSection = async () => {
   const projects = getProjects();
+  const contents: MDXRemoteSerializeResult[] = [];
+  for (const project of projects) {
+    contents.push(await serialize(project.content));
+  }
 
   return (
     <div className="min-h-dvh h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start flex flex-col">
@@ -29,8 +35,12 @@ export const OurProjectsSection = () => {
       >
         <div className={"h-full w-full max-w-[1200px]"}>
           <Carousel>
-            {projects.map((project) => (
-              <ProjectCard project={project} key={project.slug} />
+            {projects.map((project, i) => (
+              <ProjectCard
+                project={project}
+                content={contents[i]}
+                key={project.slug}
+              />
             ))}
           </Carousel>
         </div>
