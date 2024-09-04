@@ -1,8 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import React from "react";
 
-export type ProjectMetadata = {
+export interface ProjectMetadata {
+  slug: string;
   title: string;
   publishedAt: string;
   summary: string;
@@ -13,39 +12,9 @@ export type ProjectMetadata = {
     title: string;
     icon?: string;
   }[];
-};
+}
 
-export type Project = {
+export interface Project {
   data: ProjectMetadata;
-  slug: string;
-  content: string;
-};
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
-function readMDXFile(filePath: string) {
-  const rawContent = fs.readFileSync(filePath, "utf-8");
-  return matter(rawContent);
-}
-
-function getMDXProject(dir: string): Project[] {
-  const mdxFiles = getMDXFiles(dir);
-
-  return mdxFiles.map((file) => {
-    const { data, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
-
-    return {
-      data: data as ProjectMetadata,
-      slug,
-      content,
-    };
-  });
-}
-
-export function getProjects() {
-  return getMDXProject(
-    path.join(process.cwd(), "public", "content", "projects"),
-  );
+  content: React.ReactElement;
 }

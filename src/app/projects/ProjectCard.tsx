@@ -1,16 +1,9 @@
-"use client";
-
-import { useMDXComponents } from "@/mdx-components";
 import { Project } from "@/utils/projects";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React from "react";
 
-export const ProjectCard = ({
-  project,
-  content,
-}: { project: Project; content?: MDXRemoteSerializeResult }) => {
+export const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div
       className={
@@ -29,7 +22,7 @@ export const ProjectCard = ({
         )}
 
         <div className={"flex flex-wrap gap-2"}>
-          {project.data.tags.map((tag) => (
+          {project.data.tags?.map((tag) => (
             <div
               key={tag}
               className={"bg-red-500 px-2 py-1 rounded-full text-xs"}
@@ -38,11 +31,6 @@ export const ProjectCard = ({
             </div>
           ))}
         </div>
-
-        {/*<div>*/}
-        {/*  <span>Autorzy</span>*/}
-        {/*  <div className={"w-full h-1 rounded bg-red-500"} />*/}
-        {/*</div>*/}
 
         {project.data.links?.map((link) => (
           <a
@@ -69,14 +57,7 @@ export const ProjectCard = ({
         <div className={"flex flex-col gap-2 overflow-y-scroll"}>
           {project.data.summary && <div>{project.data.summary}</div>}
 
-          {/*<MDXProvider components={components}>*/}
-          {/*  <div*/}
-          {/*    // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>*/}
-          {/*    dangerouslySetInnerHTML={{ __html: md().render(project.content) }}*/}
-          {/*  />*/}
-          {/*</MDXProvider>*/}
-
-          <MDXRemote {...content} components={useMDXComponents} />
+          {project.content}
         </div>
       </div>
     </div>
