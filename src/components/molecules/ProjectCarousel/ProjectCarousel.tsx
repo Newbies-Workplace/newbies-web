@@ -3,8 +3,9 @@
 import { cn } from "@/utils/cn";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import { HandledEvents } from "react-swipeable/src/types";
 
-export const Carousel = ({
+export const ProjectCarousel = ({
   children: slides,
 }: { children: React.ReactNode[] }) => {
   const [curr, setCurr] = useState(0);
@@ -16,15 +17,30 @@ export const Carousel = ({
   const next = () =>
     setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
 
+  const shouldPreventSwipe = (e: HandledEvents) => {
+    return (e.target as HTMLElement).tagName === "IMG";
+  };
+
   const handlers = useSwipeable({
-    onSwiping: (eventData) => {
-      setSwipeOffset(eventData.deltaX);
+    onSwiping: (e) => {
+      if (shouldPreventSwipe(e.event)) {
+        return;
+      }
+      setSwipeOffset(e.deltaX);
     },
-    onSwipedLeft: () => {
+    onSwipedLeft: (e) => {
+      if (shouldPreventSwipe(e.event)) {
+        return;
+      }
+
       next();
       setSwipeOffset(0);
     },
-    onSwipedRight: () => {
+    onSwipedRight: (e) => {
+      if (shouldPreventSwipe(e.event)) {
+        return;
+      }
+
       prev();
       setSwipeOffset(0);
     },
@@ -44,6 +60,13 @@ export const Carousel = ({
           <div
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             key={index}
+            onClick={(e) => {
+              if (curr === index) return;
+
+              e.stopPropagation();
+              e.preventDefault();
+              setCurr(index);
+            }}
             className={cn(
               "flex flex-col min-w-full transition-opacity ease-out duration-500",
               curr !== index && "opacity-50",
@@ -74,9 +97,10 @@ export const Carousel = ({
           {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
           {slides.map((_: any, i: number) => (
             <div
+              onClick={() => setCurr(i)}
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={i}
-              className={`transition-all w-5 h-1.5 bg-red-500 rounded-full ${
+              className={`transition-all w-5 h-1.5 bg-red-500 rounded-full cursor-pointer ${
                 curr === i ? "p-0.5" : "bg-opacity-50"
               }`}
             />

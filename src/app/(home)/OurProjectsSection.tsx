@@ -1,11 +1,12 @@
-import { Carousel } from "@/app/projects/Carousel";
-import { ProjectCard } from "@/app/projects/ProjectCard";
+import { ProjectCarousel } from "@/components/molecules/ProjectCarousel/ProjectCarousel";
+import { ProjectCard } from "@/components/molecules/ProjectCard/ProjectCard";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
 import * as Jeteo from "@/projects/jeteo.mdx";
 import * as Retro from "@/projects/retromachina.mdx";
 import * as Swit from "@/projects/swit.mdx";
+
 export const OurProjectsSection = async () => {
 
   return (
@@ -29,11 +30,11 @@ export const OurProjectsSection = async () => {
         }
       >
         <div className={"h-full w-full max-w-[1200px]"}>
-          <Carousel>
+          <ProjectCarousel>
             <ProjectCard project={{content: Jeteo.default({}), data: Jeteo.metadata}}/>
             <ProjectCard project={{content: Retro.default({}), data: Retro.metadata}}/>
             <ProjectCard project={{content: Swit.default({}), data: Swit.metadata}}/>
-          </Carousel>
+          </ProjectCarousel>
         </div>
       </div>
     </div>

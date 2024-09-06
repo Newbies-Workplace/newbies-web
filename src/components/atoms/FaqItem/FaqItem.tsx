@@ -12,13 +12,18 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="flex flex-col w-full border-2 p-2 rounded-3xl border-green-500">
+    <div
+      className="flex flex-col w-full border-2 p-2 rounded-3xl border-green-500 cursor-pointer"
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsOpened(!isOpened);
+      }}
+    >
       <div className="flex justify-between items-center">
         <p className="font-bold text-white text-2xl shrink">{question}</p>
 
         <div
-          onClick={() => setIsOpened(!isOpened)}
-          className={`w-7 min-w-7 h-7 min-h-7 rounded-full cursor-pointer ${
+          className={`w-7 min-w-7 h-7 min-h-7 rounded-full ${
             isOpened ? "bg-green-500" : "bg-white"
           }`}
         />

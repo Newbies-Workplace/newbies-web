@@ -1,4 +1,8 @@
-import {Carousel} from "@/app/projects/Carousel";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+} from "@/components/molecules/Carousel/Carousel";
 
 export const metadata = {
     slug: "jeteo",
@@ -25,9 +29,23 @@ Spersonalizowana ankieta zastąpiła dotychczasowo używane arkusze Google.
 Projekt początkowo rozwijany był jako samoistny serwis.
 Z czasem inicjatywę przejęli praktykanci a finalnie został on dokończony w ramach hackathonu.
 
-<Carousel>
-    <img src="/content/projects/0_jeteo.jpeg" alt="Jeteo"/>
-    <img src="/content/projects/0_jeteo.jpeg" alt="Jeteo"/>
+
+export const images = [
+    "/content/projects/0_jeteo.jpeg",
+    "/content/projects/0_jeteo.jpeg",
+    "/content/projects/0_jeteo.jpeg",
+    "/content/projects/0_jeteo.jpeg",
+    "/content/projects/0_jeteo.jpeg",
+];
+
+<Carousel className={"rounded overflow-hidden"}>
+    <CarouselContent className={"px-8"}>
+        {images.map((image) => (
+            <CarouselItem key={image}>
+                <img src={image} alt="Jeteo" className={"rounded-xl"}/>
+            </CarouselItem>
+        ))}
+    </CarouselContent>
 </Carousel>
 
 Finalna wersja projektu to połączenie serwisu backendowego napisanego w nestjs oraz aplikacji frontendowej w Next.js. Wydzielenie serwisu backendowego pozwoli na przyszłe integracje z innymi serwisami oraz na możliwość podłączenia aplikacji mobilnej.

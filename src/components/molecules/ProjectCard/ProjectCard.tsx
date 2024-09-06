@@ -25,7 +25,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           {project.data.tags?.map((tag) => (
             <div
               key={tag}
-              className={"bg-red-500 px-2 py-1 rounded-full text-xs"}
+              className={"bg-red-700 px-2 py-1 rounded-full text-xs"}
             >
               {tag}
             </div>
@@ -49,7 +49,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         ))}
       </div>
 
-      <div className={"flex flex-col gap-4 "}>
+      <div className={"flex w-full flex-col gap-4"}>
         <div className={"bg-red-700 px-2 py-1 rounded-md"}>
           {project.data.title}
         </div>
