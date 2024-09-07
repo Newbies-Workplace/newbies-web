@@ -3,9 +3,9 @@ import { ProjectCard } from "@/components/molecules/ProjectCard/ProjectCard";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-import * as Jeteo from "@/projects/jeteo.mdx";
-import * as Retro from "@/projects/retromachina.mdx";
-import * as Swit from "@/projects/swit.mdx";
+import * as Jeteo from "@public/content/projects/jeteo.mdx";
+import * as Retro from "@public/content/projects/retromachina.mdx";
+import * as Swit from "@public/content/projects/swit.mdx";
 
 export const OurProjectsSection = async () => {
 

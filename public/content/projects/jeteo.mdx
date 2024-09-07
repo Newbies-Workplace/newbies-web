@@ -1,8 +1,4 @@
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from "@/components/molecules/Carousel/Carousel";
+import {MDXCarousel} from "@/components/molecules/Carousel/MDXCarousel";
 
 export const metadata = {
     slug: "jeteo",
@@ -10,7 +6,7 @@ export const metadata = {
     publishedAt: "2024-04-09",
     tags: ["backend", "frontend", "nextjs"],
     summary: "Portal do tworzenia wydarzeń oraz do zbierania feedbacku.",
-    image: "content/projects/0_jeteo.jpeg",
+    image: "content/images/0_jeteo.png",
     links: [
         {
             title: "jeteo.newbies.pl",
@@ -30,22 +26,13 @@ Projekt początkowo rozwijany był jako samoistny serwis.
 Z czasem inicjatywę przejęli praktykanci a finalnie został on dokończony w ramach hackathonu.
 
 
-export const images = [
-    "/content/projects/0_jeteo.jpeg",
-    "/content/projects/0_jeteo.jpeg",
-    "/content/projects/0_jeteo.jpeg",
-    "/content/projects/0_jeteo.jpeg",
-    "/content/projects/0_jeteo.jpeg",
-];
-
-<Carousel className={"rounded overflow-hidden"}>
-    <CarouselContent className={"px-8"}>
-        {images.map((image) => (
-            <CarouselItem key={image}>
-                <img src={image} alt="Jeteo" className={"rounded-xl"}/>
-            </CarouselItem>
-        ))}
-    </CarouselContent>
-</Carousel>
+<MDXCarousel
+    images={[
+        "/content/images/jeteo_main.png",
+        "/content/images/jeteo_event.png",
+        "/content/images/jeteo_rate.png",
+        "/content/images/jeteo_summary.png",
+    ]}
+/>
 
 Finalna wersja projektu to połączenie serwisu backendowego napisanego w nestjs oraz aplikacji frontendowej w Next.js. Wydzielenie serwisu backendowego pozwoli na przyszłe integracje z innymi serwisami oraz na możliwość podłączenia aplikacji mobilnej.

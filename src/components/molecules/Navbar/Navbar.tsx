@@ -16,7 +16,7 @@ const Navbar = ({ className }: { className?: string }) => {
         </Link>
 
         <div className="flex flex-wrap gap-4 text-white text-sm sm:text-base">
-          <Link href={"/src/projects"}>PROJEKTY</Link>
+          <Link href={"/content/projects"}>PROJEKTY</Link>
           <Link href={"/blog"}>BLOG</Link>
           <Link href={"https://discord.gg/u9tuJWkXYg"}>DOŁĄCZ</Link>
         </div>
