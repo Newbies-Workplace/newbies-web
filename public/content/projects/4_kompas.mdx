@@ -1,0 +1,22 @@
+import {MDXCarousel} from "@/components/molecules/Carousel/MDXCarousel";
+
+export const metadata = {
+    slug: "kompas",
+    title: "Kompas",
+    publishedAt: "2024-04-09",
+    tags: ["mobile", "php"],
+    image: "content/images/kompas.png",
+}
+
+Aplikacja do zarządzania grą miejską dla organizatorów takich inicjatyw.
+To unikatowe rozwiązanie pozwoli stworzyć grę za pomocą kilku kliknięć i od razu udostępnić ją zainteresowanym graczom.
+Wszystkie materiały znajdują się w jednym miejscu, a uczestnik gry widzi je na swoim telefonie.
+
+<MDXCarousel
+    images={[
+        "/content/images/kompas_1.png",
+        "/content/images/kompas_2.png",
+        "/content/images/kompas_3.png",
+    ]}
+    ratio={"mobile"}
+/>
