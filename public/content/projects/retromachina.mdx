@@ -1,0 +1,37 @@
+import {MDXCarousel} from "@/components/molecules/Carousel/MDXCarousel";
+export const metadata = {
+    slug: "retromachina",
+    title: "Retromachina",
+    publishedAt: "2024-04-09",
+    tags: ["backend", "frontend", "scrum"],
+    summary: "Narzędzie służące do przeprowadzania retrospektyw",
+    image: "content/images/1_retromachina.png",
+    links: [
+        {
+            title: "retro.newbies.pl",
+            url: "https://retro.newbies.pl/"
+        },
+        {
+            title: "GitHub",
+            url: "https://github.com/Newbies-Workplace/retromachina"
+        }
+    ]
+}
+
+Retromachina to narzędzie inspirowane serwisem Parabol, służącego do pomocy przy przeprowadzaniu retrospektyw.
+Projekt zrealizowany został od podstaw przez praktykantów, bazowali oni jedynie na przygotowanych przez nas makietach.
+Narzędzie to jest obecnie testowane przez zespół Drive, dalszym etapem jest umożliwienie korzystania z niego także innym RST-owym zespołom!
+
+<MDXCarousel
+    images={[
+        "/content/images/retro_reflection.png",
+        "/content/images/retro_slot.png",
+    ]}
+/>
+
+Drugim życiem Retromachiny było połączenie projektu frontendowego z backendowym w jedno monolityczne repozytorium. (monorepo)
+Od tego czasu narzędzie to zyskało nowe funkcjonalności, takie jak:
+
+- Maszyna losująca
+- Możliwość dodawania "wrzutek" w dowolnym momencie przed, w trakcie lub po retrospektywie
+- Rework UI/UX z wykorzystaniem [tailwindcss](https://tailwindcss.com/) oraz [shadcn](https://ui.shadcn.com/)

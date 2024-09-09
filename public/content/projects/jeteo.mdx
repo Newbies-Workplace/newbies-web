@@ -1,0 +1,39 @@
+import {MDXCarousel} from "@/components/molecules/Carousel/MDXCarousel";
+
+export const metadata = {
+    slug: "jeteo",
+    title: "Jeteo",
+    publishedAt: "2024-04-09",
+    tags: ["backend", "frontend", "nextjs"],
+    summary: "Portal do tworzenia wydarzeń oraz do zbierania feedbacku.",
+    image: "content/images/0_jeteo.png",
+    links: [
+        {
+            title: "jeteo.newbies.pl",
+            url: "https://jeteo.newbies.pl/"
+        },
+        {
+            title: "GitHub",
+            url: "https://github.com/Newbies-Workplace/jeteo"
+        }
+    ]
+}
+
+Portal jeteo powstał jako odpowiedź na potrzebę tworzenia wydarzeń **RST CodeMeetings** oraz zbierania feedbacku.
+Spersonalizowana ankieta zastąpiła dotychczasowo używane arkusze Google.
+
+Projekt początkowo rozwijany był jako samoistny serwis.
+Z czasem inicjatywę przejęli praktykanci a finalnie został on dokończony w ramach hackathonu.
+
+<MDXCarousel
+    images={[
+        "/content/images/jeteo_main.png",
+        "/content/images/jeteo_event.png",
+        "/content/images/jeteo_rate.png",
+        "/content/images/jeteo_summary.png",
+    ]}
+/>
+
+Finalna wersja projektu to połączenie serwisu backendowego napisanego w nestjs oraz aplikacji frontendowej w Next.js. Wydzielenie serwisu backendowego pozwoli na przyszłe integracje z innymi serwisami oraz na możliwość podłączenia aplikacji mobilnej.
+
+>  wnioski na przyszłość: warto skorzystać z dobrodziejstw Next.js bez konieczności tworzenia serwisu backendowego.

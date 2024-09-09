@@ -1,7 +1,6 @@
 import { Project } from "@/utils/projects";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import md from "markdown-it";
 import React from "react";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
@@ -23,20 +22,15 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         )}
 
         <div className={"flex flex-wrap gap-2"}>
-          {project.data.tags.map((tag) => (
+          {project.data.tags?.map((tag) => (
             <div
               key={tag}
-              className={"bg-red-500 px-2 py-1 rounded-full text-xs"}
+              className={"bg-red-700 px-2 py-1 rounded-full text-xs"}
             >
               {tag}
             </div>
           ))}
         </div>
-
-        {/*<div>*/}
-        {/*  <span>Autorzy</span>*/}
-        {/*  <div className={"w-full h-1 rounded bg-red-500"} />*/}
-        {/*</div>*/}
 
         {project.data.links?.map((link) => (
           <a
@@ -55,19 +49,15 @@ export const ProjectCard = ({ project }: { project: Project }) => {
         ))}
       </div>
 
-      <div className={"flex flex-col gap-4 "}>
-        <div className={"bg-red-700 px-2 py-1 rounded-md"}>
-          {project.data.title}
-        </div>
-
-        <div className={"flex flex-col gap-2 overflow-y-scroll"}>
+      <div className={"flex w-full flex-col gap-4"}>
+        <div className={"bg-red-700 px-2 py-1 rounded-md font-jetbrains-mono"}>
+          <b>{project.data.title}</b>
           {project.data.summary && <div>{project.data.summary}</div>}
-
-          <div
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-            dangerouslySetInnerHTML={{ __html: md().render(project.content) }}
-          />
         </div>
+
+        <article className={"overflow-y-scroll prose prose-neutral"}>
+          {project.content}
+        </article>
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
-import { Carousel } from "@/app/projects/Carousel";
-import { ProjectCard } from "@/app/projects/ProjectCard";
-import { getProjects } from "@/utils/projects";
+import { ProjectCarousel } from "@/components/molecules/ProjectCarousel/ProjectCarousel";
+import { ProjectCard } from "@/components/molecules/ProjectCard/ProjectCard";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-export const OurProjectsSection = () => {
-  const projects = getProjects();
+import * as Jeteo from "@public/content/projects/jeteo.mdx";
+import * as Retro from "@public/content/projects/retromachina.mdx";
+import * as Swit from "@public/content/projects/swit.mdx";
+
+export const OurProjectsSection = async () => {
 
   return (
     <div className="min-h-dvh h-screen bg-red-900 bg-dot-white/[0.2] relative snap-start flex flex-col">
@@ -28,11 +30,11 @@ export const OurProjectsSection = () => {
         }
       >
         <div className={"h-full w-full max-w-[1200px]"}>
-          <Carousel>
-            {projects.map((project) => (
-              <ProjectCard project={project} key={project.slug} />
-            ))}
-          </Carousel>
+          <ProjectCarousel>
+            <ProjectCard project={{content: Jeteo.default({}), data: Jeteo.metadata}}/>
+            <ProjectCard project={{content: Retro.default({}), data: Retro.metadata}}/>
+            <ProjectCard project={{content: Swit.default({}), data: Swit.metadata}}/>
+          </ProjectCarousel>
         </div>
       </div>
     </div>

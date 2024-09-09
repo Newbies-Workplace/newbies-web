@@ -74,7 +74,7 @@ export const SiteSection: React.FC = () => {
               <span className={"text-xs"}>
                 Powered by&nbsp;
                 <a href={"https://rst.software"} className={"underline"}>
-                  RST Software Masters
+                  RST Software
                 </a>
               </span>
             </div>
