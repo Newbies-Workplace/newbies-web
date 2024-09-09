@@ -50,14 +50,14 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       </div>
 
       <div className={"flex w-full flex-col gap-4"}>
-        <div className={"bg-red-700 px-2 py-1 rounded-md"}>
+        <div className={"bg-red-700 px-2 py-1 rounded-md font-jetbrains-mono"}>
           <b>{project.data.title}</b>
           {project.data.summary && <div>{project.data.summary}</div>}
         </div>
 
-        <div className={"flex flex-col gap-2 overflow-y-scroll"}>
+        <article className={"overflow-y-scroll prose prose-neutral"}>
           {project.content}
-        </div>
+        </article>
       </div>
     </div>
   );

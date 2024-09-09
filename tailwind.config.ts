@@ -99,6 +99,29 @@ const config: Config = {
       aspectRatio: {
         "2/3": "2 / 3",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "none",
+            color: "var(--color-text)",
+            strong: {
+              color: "var(--color-text)",
+            },
+            a: {
+              color: "var(--color-text)",
+            },
+            blockquote: {
+              color: "var(--color-text)",
+            },
+            h1: {
+              color: "var(--color-text)",
+            },
+            th: {
+              color: "var(--color-text)",
+            },
+          },
+        },
+      },
       fontFamily: {
         saira: ["Saira", "sans-serif"],
         "lucida-console": ["Lucida Console", "Monaco", "monospace"],
@@ -120,6 +143,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     addVariablesForColors,
     ({ matchUtilities, theme }: any) => {
       matchUtilities(

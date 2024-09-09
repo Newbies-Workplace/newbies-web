@@ -1,3 +1,4 @@
+import {MDXCarousel} from "@/components/molecules/Carousel/MDXCarousel";
 export const metadata = {
     slug: "retromachina",
     title: "Retromachina",
@@ -17,10 +18,16 @@ export const metadata = {
     ]
 }
 
-
-Retromachina to klon płatnego narzędzia Parabol, służącego do pomocy przy przeprowadzaniu retrospektyw.
+Retromachina to narzędzie inspirowane serwisem Parabol, służącego do pomocy przy przeprowadzaniu retrospektyw.
 Projekt zrealizowany został od podstaw przez praktykantów, bazowali oni jedynie na przygotowanych przez nas makietach.
 Narzędzie to jest obecnie testowane przez zespół Drive, dalszym etapem jest umożliwienie korzystania z niego także innym RST-owym zespołom!
+
+<MDXCarousel
+    images={[
+        "/content/images/retro_reflection.png",
+        "/content/images/retro_slot.png",
+    ]}
+/>
 
 Drugim życiem Retromachiny było połączenie projektu frontendowego z backendowym w jedno monolityczne repozytorium. (monorepo)
 Od tego czasu narzędzie to zyskało nowe funkcjonalności, takie jak:
