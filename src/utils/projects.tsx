@@ -1,5 +1,4 @@
-import { ProjectCard } from "@/components/molecules/ProjectCard/ProjectCard";
-import React, { ReactNode } from "react";
+import React from "react";
 
 export interface ProjectMetadata {
   slug: string;
