@@ -1,4 +1,3 @@
-"use client";
 
 import { CardDeck } from "@/components/molecules/TeamCard/CardDeck";
 import { TeamCard } from "@/components/molecules/TeamCard/TeamCard";
@@ -8,7 +7,7 @@ import Marquee from "react-fast-marquee";
 
 export const OurTeamSection = () => {
   return (
-    <div className="min-h-dvh bg-orange-900 bg-dot-white/[0.2] relative snap-start">
+    <div className="min-h-dvh h-full bg-orange-900 bg-dot-white/[0.2] relative snap-start">
       <div className={"-rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -23,7 +22,7 @@ export const OurTeamSection = () => {
       </div>
 
       <div
-        className={"w-full h-full flex flex-col justify-center items-center"}
+        className={"w-full h-full pb-32 flex flex-col justify-center items-center"}
       >
         <div
           className={

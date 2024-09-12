@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { TeamMember } from "@public/content/members/members";
 import { Portal } from "next/dist/client/portal";
