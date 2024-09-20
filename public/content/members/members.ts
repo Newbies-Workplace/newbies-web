@@ -78,4 +78,26 @@ export const teamMembers: TeamMember[] = [
     technologies: [],
     achievements: [],
   },
+  {
+    name: "Ty",
+    level: 24,
+    img: "image/placeholder.png",
+    stats: {
+      hp: 35,
+      mana: 20,
+    },
+    technologies: [],
+    achievements: [],
+  },
+  {
+    name: "Ja",
+    level: 24,
+    img: "image/placeholder.png",
+    stats: {
+      hp: 35,
+      mana: 20,
+    },
+    technologies: [],
+    achievements: [],
+  },
 ];

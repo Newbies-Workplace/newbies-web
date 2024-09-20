@@ -2,24 +2,31 @@
 
 import { cn } from "@/utils/cn";
 import { TeamMember } from "@public/content/members/members";
+import { motion } from "framer-motion";
 import { Portal } from "next/dist/client/portal";
 import React, {
+  createRef,
   CSSProperties,
   MouseEventHandler,
-  createRef,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
 } from "react";
 import { Tooltip } from "react-tooltip";
 import styles from "./TeamCard.module.css";
 
 interface TeamCardProps {
+  hidden?: boolean;
+  isPresented?: boolean;
   member: TeamMember;
+  onClick?: () => void;
 }
 
 export const TeamCard: React.FC<TeamCardProps> = ({
+  hidden,
+  isPresented,
   member: { img, name, level, stats, technologies, achievements },
+  onClick,
 }) => {
   const cardRef = createRef<HTMLDivElement>();
 
@@ -28,6 +35,10 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   const [hologramStyle, setHologramStyle] = useState<CSSProperties>({});
 
   useEffect(() => {
+    if (!isPresented) {
+      return;
+    }
+
     const handleOrientation = (event: DeviceOrientationEvent) => {
       const { beta, gamma } = event;
 
@@ -72,7 +83,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         );
       };
     }
-  }, []);
+  }, [isPresented]);
 
   const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
     const cardDiv = cardRef.current;
@@ -127,13 +138,25 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   }, [position.x, position.y]);
 
   return (
-    <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <motion.div
+      layoutId={name}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      className={cn(
+        "aspect-[2/3]",
+        isPresented
+          ? "max-h-[calc(100vh-64px)] max-w-[calc(100vw-32px)]"
+          : "max-h-[600px]",
+      )}
+    >
       <div
         ref={cardRef}
         style={cardStyles}
-        className={
-          "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-out duration-100 overflow-hidden font-jetbrains-mono"
-        }
+        className={cn(
+          "size-full transform-gpu select-none relative rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-out duration-100 overflow-hidden font-jetbrains-mono",
+          hidden && "invisible",
+        )}
       >
         <div
           style={hologramStyle}
@@ -164,10 +187,22 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         >
           <div className={"self-center"}>
             <span className={"font-bold text-xl select-none"}>{name}</span>
-            <span className={"hidden sm:inline ml-2 text-xs"}>lvl {level}</span>
+            <span
+              className={cn(
+                isPresented ? "inline" : "sm:inline hidden",
+                "ml-2 text-xs",
+              )}
+            >
+              lvl {level}
+            </span>
           </div>
 
-          <div className={"hidden sm:flex flex-row w-full gap-2"}>
+          <div
+            className={cn(
+              isPresented ? "flex" : "sm:flex hidden",
+              "flex-col w-full gap-2 sm:flex-row",
+            )}
+          >
             <div className={"w-full"}>
               <span className={"text-sm"}>Życie</span>
               <div className={"w-full h-1.5 rounded bg-orange-700"}>
@@ -189,7 +224,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           </div>
 
           {technologies && technologies.length > 0 && (
-            <div className={"hidden md:block"}>
+            <div className={cn(isPresented ? "block" : "sm:block hidden")}>
               <span className={"text-sm"}>Ekwipunek</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
                 {technologies?.map((tech, i) => (
@@ -216,7 +251,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           )}
 
           {achievements && achievements.length > 0 && (
-            <div className={"hidden md:block"}>
+            <div className={cn(isPresented ? "block" : "sm:block hidden")}>
               <span className={"text-sm"}>Osiągnięcia</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
                 {achievements?.map((ach, i) => (
@@ -243,6 +278,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

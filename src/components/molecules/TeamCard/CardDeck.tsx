@@ -9,7 +9,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ degree = 3, children }) => {
   const totalChildren = children.length;
 
   return (
-    <div className={"m-8 p-4 flex justify-center"}>
+    <div className={"m-8 px-8 py-4 flex justify-center"}>
       {children.map((child, index) => {
         const indexFromCenter =
           totalChildren % 2 === 0
