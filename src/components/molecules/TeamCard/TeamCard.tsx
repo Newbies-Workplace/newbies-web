@@ -231,7 +231,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
 
           {isPresented && badges && badges.length > 0 && (
             <div className={cn(isPresented ? "block" : "sm:block hidden")}>
-              <span className={"text-sm"}>Ekwipunek</span>
+              <span className={"text-sm"}>Odznaki</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
                 {badges?.map((badge, i) => (
                   <div
