@@ -1,10 +1,5 @@
-interface Achievement {
+interface Badge {
   tooltip: string;
-  img: string;
-}
-
-interface Technology {
-  name: string;
   img: string;
 }
 
@@ -16,20 +11,17 @@ export interface TeamMember {
     hp: number;
     mana: number;
   };
-  technologies: Technology[];
-  achievements: Achievement[];
+  badges: Badge[];
 }
 
-const technologies: { [key: string]: Technology } = {
-  react: {
-    name: "React",
-    img: "image/placeholder.png",
-  },
-};
-const achievements: { [key: string]: Achievement } = {
-  hackathon2021: {
+const badges = {
+  jeteoHackathon: {
     tooltip: "Hackathon 2k21",
-    img: "image/placeholder.png",
+    img: "content/images/badge/jeteo-hackathon.svg",
+  },
+  practices: {
+    tooltip: "Praktyki",
+    img: "content/images/badge/practices.svg",
   },
 };
 
@@ -42,8 +34,7 @@ export const teamMembers: TeamMember[] = [
       hp: 20,
       mana: 70,
     },
-    technologies: [technologies.react],
-    achievements: [achievements.hackathon2021],
+    badges: [badges.jeteoHackathon, badges.practices],
   },
   {
     name: "Kamil",
@@ -53,8 +44,7 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    technologies: [technologies.react],
-    achievements: [achievements.hackathon2021],
+    badges: [badges.jeteoHackathon],
   },
   {
     name: "Oskar",
@@ -64,8 +54,7 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    technologies: [],
-    achievements: [],
+    badges: [],
   },
   {
     name: "Rafał",
@@ -75,8 +64,7 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    technologies: [],
-    achievements: [],
+    badges: [],
   },
   {
     name: "Ty",
@@ -86,8 +74,7 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    technologies: [],
-    achievements: [],
+    badges: [],
   },
   {
     name: "Ja",
@@ -97,7 +84,6 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    technologies: [],
-    achievements: [],
+    badges: [],
   },
 ];

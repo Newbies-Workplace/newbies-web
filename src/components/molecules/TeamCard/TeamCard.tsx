@@ -25,7 +25,7 @@ interface TeamCardProps {
 export const TeamCard: React.FC<TeamCardProps> = ({
   hidden,
   isPresented,
-  member: { img, name, level, stats, technologies, achievements },
+  member: { img, name, level, stats, badges },
   onClick,
 }) => {
   const cardRef = createRef<HTMLDivElement>();
@@ -38,6 +38,12 @@ export const TeamCard: React.FC<TeamCardProps> = ({
     if (!isPresented) {
       return;
     }
+
+    setRotation({ x: 0, y: 0 });
+    setPosition({ x: 0, y: 0 });
+    setHologramStyle({
+      backgroundPosition: "center center",
+    });
 
     const handleOrientation = (event: DeviceOrientationEvent) => {
       const { beta, gamma } = event;
@@ -223,51 +229,24 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             </div>
           </div>
 
-          {technologies && technologies.length > 0 && (
+          {isPresented && badges && badges.length > 0 && (
             <div className={cn(isPresented ? "block" : "sm:block hidden")}>
               <span className={"text-sm"}>Ekwipunek</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
-                {technologies?.map((tech, i) => (
+                {badges?.map((badge, i) => (
                   <div
-                    key={tech.name}
-                    data-tooltip-id={`technology-tooltip-${name}-${i}`}
+                    key={badge.tooltip}
+                    data-tooltip-id={`badge-tooltip-${name}-${i}`}
                   >
                     <img
-                      className={"bg-orange-500 rounded size-6 xl:size-10"}
-                      alt={`Ikona technologii ${tech.name}`}
-                      src={tech.img}
+                      className={"bg-orange-500 rounded-lg size-14"}
+                      alt={`Ikona osiągnięcia ${badge.tooltip}`}
+                      src={badge.img}
                     />
                     <Portal type={"root"}>
                       <Tooltip
-                        id={`technology-tooltip-${name}-${i}`}
-                        content={tech.name}
-                        place={"bottom"}
-                      />
-                    </Portal>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {achievements && achievements.length > 0 && (
-            <div className={cn(isPresented ? "block" : "sm:block hidden")}>
-              <span className={"text-sm"}>Osiągnięcia</span>
-              <div className={"flex flex-row flex-wrap gap-2"}>
-                {achievements?.map((ach, i) => (
-                  <div
-                    key={ach.tooltip}
-                    data-tooltip-id={`achievement-tooltip-${name}-${i}`}
-                  >
-                    <img
-                      className={"bg-orange-500 rounded-full size-8 xl:size-12"}
-                      alt={`Ikona osiągnięcia ${ach.tooltip}`}
-                      src={ach.img}
-                    />
-                    <Portal type={"root"}>
-                      <Tooltip
-                        id={`achievement-tooltip-${name}-${i}`}
-                        content={ach.tooltip}
+                        id={`badge-tooltip-${name}-${i}`}
+                        content={badge.tooltip}
                         place={"bottom"}
                       />
                     </Portal>
