@@ -1,23 +1,32 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { TeamMember } from "@public/content/members/members";
+import { motion } from "framer-motion";
 import { Portal } from "next/dist/client/portal";
 import React, {
+  createRef,
   CSSProperties,
   MouseEventHandler,
-  createRef,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
 } from "react";
 import { Tooltip } from "react-tooltip";
 import styles from "./TeamCard.module.css";
 
 interface TeamCardProps {
+  hidden?: boolean;
+  isPresented?: boolean;
   member: TeamMember;
+  onClick?: () => void;
 }
 
 export const TeamCard: React.FC<TeamCardProps> = ({
-  member: { img, name, level, stats, technologies, achievements },
+  hidden,
+  isPresented,
+  member: { img, name, level, stats, badges },
+  onClick,
 }) => {
   const cardRef = createRef<HTMLDivElement>();
 
@@ -26,6 +35,16 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   const [hologramStyle, setHologramStyle] = useState<CSSProperties>({});
 
   useEffect(() => {
+    if (!isPresented) {
+      return;
+    }
+
+    setRotation({ x: 0, y: 0 });
+    setPosition({ x: 0, y: 0 });
+    setHologramStyle({
+      backgroundPosition: "center center",
+    });
+
     const handleOrientation = (event: DeviceOrientationEvent) => {
       const { beta, gamma } = event;
 
@@ -70,7 +89,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         );
       };
     }
-  }, []);
+  }, [isPresented]);
 
   const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
     const cardDiv = cardRef.current;
@@ -125,13 +144,25 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   }, [position.x, position.y]);
 
   return (
-    <div onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <motion.div
+      layoutId={name}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      className={cn(
+        "aspect-[2/3]",
+        isPresented
+          ? "max-h-[calc(100vh-64px)] max-w-[calc(100vw-32px)]"
+          : "max-h-[600px]",
+      )}
+    >
       <div
         ref={cardRef}
         style={cardStyles}
-        className={
-          "transform-gpu relative aspect-[2/3] max-h-[600px] rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-out duration-100 overflow-hidden font-jetbrains-mono"
-        }
+        className={cn(
+          "size-full transform-gpu select-none relative rounded-2xl border-4 border-orange-500 hover:shadow-neon-orange transition-shadow ease-out duration-100 overflow-hidden font-jetbrains-mono",
+          hidden && "invisible",
+        )}
       >
         <div
           style={hologramStyle}
@@ -162,10 +193,22 @@ export const TeamCard: React.FC<TeamCardProps> = ({
         >
           <div className={"self-center"}>
             <span className={"font-bold text-xl select-none"}>{name}</span>
-            <span className={"hidden sm:inline ml-2 text-xs"}>lvl {level}</span>
+            <span
+              className={cn(
+                isPresented ? "inline" : "sm:inline hidden",
+                "ml-2 text-xs",
+              )}
+            >
+              lvl {level}
+            </span>
           </div>
 
-          <div className={"hidden sm:flex flex-row w-full gap-2"}>
+          <div
+            className={cn(
+              isPresented ? "flex" : "sm:flex hidden",
+              "flex-col w-full gap-2 sm:flex-row",
+            )}
+          >
             <div className={"w-full"}>
               <span className={"text-sm"}>Życie</span>
               <div className={"w-full h-1.5 rounded bg-orange-700"}>
@@ -186,51 +229,24 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             </div>
           </div>
 
-          {technologies && technologies.length > 0 && (
-            <div className={"hidden md:block"}>
-              <span className={"text-sm"}>Ekwipunek</span>
+          {isPresented && badges && badges.length > 0 && (
+            <div className={cn(isPresented ? "block" : "sm:block hidden")}>
+              <span className={"text-sm"}>Odznaki</span>
               <div className={"flex flex-row flex-wrap gap-2"}>
-                {technologies?.map((tech, i) => (
+                {badges?.map((badge, i) => (
                   <div
-                    key={tech.name}
-                    data-tooltip-id={`technology-tooltip-${name}-${i}`}
+                    key={badge.tooltip}
+                    data-tooltip-id={`badge-tooltip-${name}-${i}`}
                   >
                     <img
-                      className={"bg-orange-500 rounded size-6 xl:size-10"}
-                      alt={`Ikona technologii ${tech.name}`}
-                      src={tech.img}
+                      className={"bg-orange-500 rounded-lg size-14"}
+                      alt={`Ikona osiągnięcia ${badge.tooltip}`}
+                      src={badge.img}
                     />
                     <Portal type={"root"}>
                       <Tooltip
-                        id={`technology-tooltip-${name}-${i}`}
-                        content={tech.name}
-                        place={"bottom"}
-                      />
-                    </Portal>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {achievements && achievements.length > 0 && (
-            <div className={"hidden md:block"}>
-              <span className={"text-sm"}>Osiągnięcia</span>
-              <div className={"flex flex-row flex-wrap gap-2"}>
-                {achievements?.map((ach, i) => (
-                  <div
-                    key={ach.tooltip}
-                    data-tooltip-id={`achievement-tooltip-${name}-${i}`}
-                  >
-                    <img
-                      className={"bg-orange-500 rounded-full size-8 xl:size-12"}
-                      alt={`Ikona osiągnięcia ${ach.tooltip}`}
-                      src={ach.img}
-                    />
-                    <Portal type={"root"}>
-                      <Tooltip
-                        id={`achievement-tooltip-${name}-${i}`}
-                        content={ach.tooltip}
+                        id={`badge-tooltip-${name}-${i}`}
+                        content={badge.tooltip}
                         place={"bottom"}
                       />
                     </Portal>
@@ -241,6 +257,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

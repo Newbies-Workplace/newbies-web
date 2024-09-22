@@ -66,6 +66,7 @@ export const BootingUpTerminalSection: React.FC<BootingUpTerminalSectionProps> =
               "whitespace-pre text-blue-500 text-shadow shadow-blue-500"
             }
           >
+            {/* @ts-ignore */}
             {banner}
           </b>
 

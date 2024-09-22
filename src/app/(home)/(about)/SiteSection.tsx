@@ -374,7 +374,7 @@ const ScrollForMore: React.FC = () => {
   return (
     <div className={"flex flex-col gap-4 justify-center items-center"}>
       <div className={"flex gap-4 justify-center items-center"}>
-        <div className={" animate-bounce"}>
+        <div className={"animate-bounce"}>
           <CursorPointerIcon
             width={100}
             height={100}
