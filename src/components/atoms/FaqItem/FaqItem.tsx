@@ -13,7 +13,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
 
   return (
     <div
-      className="flex flex-col w-full border-2 p-2 rounded-3xl border-green-500 cursor-pointer"
+      className="flex flex-col w-full border-2 p-2 rounded-3xl border-green-500 hover:bg-green-800 cursor-pointer"
       onClick={(e) => {
         e.stopPropagation();
         setIsOpened(!isOpened);
@@ -30,7 +30,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
       </div>
 
       <motion.div
-        className={"flex flex-col"}
+        className={"flex flex-col text-white text-base whitespace-pre-wrap"}
         animate={{
           height: isOpened ? "auto" : 0,
           opacity: isOpened ? 1 : 0,
@@ -39,11 +39,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ question, answer }) => {
       >
         <div className="bg-white h-0.5 my-2" />
 
-        {typeof answer === "string" ? (
-          <p className="text-white text-xl">{answer}</p>
-        ) : (
-          answer
-        )}
+        {typeof answer === "string" ? <p>{answer}</p> : answer}
       </motion.div>
     </div>
   );

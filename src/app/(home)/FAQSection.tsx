@@ -18,19 +18,33 @@ export const FaqSection = () => {
         </Marquee>
       </div>
 
-      <div className={"w-full flex flex-col justify-center items-center"}>
+      <div className={"w-full h-full flex flex-col justify-center items-center"}>
         <div
           className={
-            "container flex flex-col justify-center items-center gap-4 py-8 px-4"
+            "container flex h-full flex-col justify-center items-center gap-4 py-8 px-4"
           }
         >
           <FaqItem
             question="Jak do nas dołączyć?"
-            answer="Dołączyć na discorda"
+            answer={"Wystarczy że dołączysz na naszego discorda i pojawisz się na spotkaniu!\n\nTo takie proste...\n\nI nawet darmowe (uczciwa cena)"}
           />
           <FaqItem
-            question="Jak wycentrować diva"
-            answer={"Dołączyć na discorda"}
+            question="Czy mogę u was zaliczyć praktyki?"
+            answer={
+            <>
+              Tak, prowadzimy praktyki dla studentów oraz uczniów szkół średnich. Wystarczy że zgłosisz się do nas na maila:
+              <a href={"mailto:praktyki@rst.com.pl"} className={"underline"}>praktyki@rst.com.pl</a>
+              <br/>
+              Praktyki prowadzimy projektowo - wybieramy projekty newbiesowe do których możesz dołączyć i zdobywać doświadczenie. Jeśli chętnych na dany termin jest więcej, to wymyślamy nowe projekty.
+              <br/>
+              <br/>
+              Oceniamy praktyki na podstawie zaangażowania, chęci nauki oraz postępów w nauce. Wszystko zależy od Ciebie!
+            </>
+          }
+          />
+          <FaqItem
+            question="Skąd jesteście?"
+            answer={"Newbies powstało w Świdnicy dzięki firmie RST, ale działamy online, więc możesz do nas dołączyć z każdego miejsca na ziemi!"}
           />
           <FaqItem
             question="Co to jest rekurencja?"
