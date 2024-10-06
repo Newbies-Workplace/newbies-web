@@ -1,11 +1,12 @@
 "use client";
 
-import {MacWindow} from "@/components/molecules/MacWindow/MacWindow";
-import {cn} from "@/utils/cn";
-import {motion} from "framer-motion";
-import React, {useEffect, useRef, useState} from "react";
+import { MacWindow } from "@/components/molecules/MacWindow/MacWindow";
+import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
-import {Button} from "@/components/atoms/Button/Button";
+import { Button } from "@/components/atoms/Button/Button";
+import {DISCORD_LINK} from "@/utils/constants";
 
 export const JoinUsSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -74,13 +75,11 @@ export const JoinUsSection = () => {
                 </div>
 
                 <a
-                  href={"https://discord.gg/u9tuJWkXYg"}
+                  href={DISCORD_LINK}
                   target={"_blank"}
                   rel="noreferrer"
                 >
-                  <Button className={"shadow-neon-blue"}>
-                    Wpadnij do nas
-                  </Button>
+                  <Button className={"shadow-neon-blue"}>Wpadnij do nas</Button>
                 </a>
 
                 <p className={"text-xs text-gray-300"}>
@@ -91,8 +90,8 @@ export const JoinUsSection = () => {
           </div>
 
           <motion.div
-            initial={{top: 5}}
-            whileInView={{top: 220}}
+            initial={{ top: 5 }}
+            whileInView={{ top: 220 }}
             transition={{ duration: 1.3 }}
             viewport={{ once: true }}
             className="absolute sm:left-10 left-1"
@@ -136,10 +135,10 @@ export const JoinUsSection = () => {
 };
 
 const Eyes = ({
-                className,
-                mousePos,
-                sizeMultiplier = 1,
-              }: {
+  className,
+  mousePos,
+  sizeMultiplier = 1,
+}: {
   className?: string;
   mousePos: {
     x: number;
@@ -174,10 +173,10 @@ const Eyes = ({
 };
 
 const Eyeball = ({
-                   sizeMultiplier = 1,
-                   mousePos,
-                   className,
-                 }: {
+  sizeMultiplier = 1,
+  mousePos,
+  className,
+}: {
   sizeMultiplier?: number;
   mousePos: { x: number; y: number };
   className?: string;
