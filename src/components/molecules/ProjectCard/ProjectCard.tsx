@@ -1,6 +1,5 @@
 import { Project } from "@/utils/projects";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ExternalLink, Link } from "lucide-react";
 import React from "react";
 
 export const ProjectCard = ({ project }: { project: Project }) => {
@@ -42,7 +41,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
               "flex gap-2 items-center text-sm text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md"
             }
           >
-            <FontAwesomeIcon icon={faLink} />
+            <Link size={20} />
 
             {link.title}
           </a>

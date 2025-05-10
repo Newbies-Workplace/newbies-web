@@ -1,4 +1,4 @@
-FROM node:18.17.0 AS builder
+FROM node:22 AS builder
 
 # Create build directory
 WORKDIR /build
@@ -6,10 +6,10 @@ WORKDIR /build
 COPY . ./
 
 # Install build dependencies
-RUN npm install
+RUN npm ci
 RUN npm run build
 
-FROM node:18.17.0-alpine
+FROM node:22-alpine
 WORKDIR /app
 
 ENV NODE_ENV production
