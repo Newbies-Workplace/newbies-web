@@ -1,3 +1,5 @@
+"use client";
+
 import FaqItem from "@/components/atoms/FaqItem/FaqItem";
 import React from "react";
 import Marquee from "react-fast-marquee";
@@ -18,7 +20,9 @@ export const FaqSection = () => {
         </Marquee>
       </div>
 
-      <div className={"w-full h-full flex flex-col justify-center items-center"}>
+      <div
+        className={"w-full h-full flex flex-col justify-center items-center"}
+      >
         <div
           className={
             "container flex h-full flex-col justify-center items-center gap-4 py-8 px-4"
@@ -26,25 +30,36 @@ export const FaqSection = () => {
         >
           <FaqItem
             question="Jak do nas dołączyć?"
-            answer={"Wystarczy że dołączysz na naszego discorda i pojawisz się na spotkaniu!\n\nTo takie proste...\n\nI nawet darmowe (uczciwa cena)"}
+            answer={
+              "Wystarczy że dołączysz na naszego discorda i pojawisz się na spotkaniu!\n\nTo takie proste...\n\nI nawet darmowe (uczciwa cena)"
+            }
           />
           <FaqItem
             question="Czy mogę u was zaliczyć praktyki?"
             answer={
-            <>
-              Tak, prowadzimy praktyki dla studentów oraz uczniów szkół średnich. Wystarczy że zgłosisz się do nas na maila:
-              <a href={"mailto:praktyki@rst.com.pl"} className={"underline"}>praktyki@rst.com.pl</a>
-              <br/>
-              Praktyki prowadzimy projektowo - wybieramy projekty newbiesowe do których możesz dołączyć i zdobywać doświadczenie. Jeśli chętnych na dany termin jest więcej, to wymyślamy nowe projekty.
-              <br/>
-              <br/>
-              Oceniamy praktyki na podstawie zaangażowania, chęci nauki oraz postępów w nauce. Wszystko zależy od Ciebie!
-            </>
-          }
+              <>
+                Tak, prowadzimy praktyki dla studentów oraz uczniów szkół
+                średnich. Wystarczy że zgłosisz się do nas na maila:{" "}
+                <a href={"mailto:praktyki@rst.com.pl"} className={"underline"}>
+                  praktyki@rst.com.pl
+                </a>
+                <br />
+                <br />
+                Praktyki prowadzimy projektowo - wybieramy projekty newbiesowe
+                do których możesz dołączyć i zdobywać doświadczenie. Jeśli
+                chętnych na dany termin jest więcej, to wymyślamy nowe projekty.
+                <br />
+                <br />
+                Oceniamy praktyki na podstawie zaangażowania, chęci nauki oraz
+                postępów w nauce. Wszystko zależy od Ciebie!
+              </>
+            }
           />
           <FaqItem
             question="Skąd jesteście?"
-            answer={"Newbies powstało w Świdnicy dzięki firmie RST, ale działamy online, więc możesz do nas dołączyć z każdego miejsca na ziemi!"}
+            answer={
+              "Newbies powstało w Świdnicy dzięki firmie RST, ale działamy online, więc możesz do nas dołączyć z każdego miejsca na ziemi!"
+            }
           />
           <FaqItem
             question="Co to jest rekurencja?"
