@@ -135,7 +135,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   const holoStyles: CSSProperties = useMemo(() => {
     return {
       mixBlendMode: "color-dodge",
-      filter: "brightness(0.7) contrast(1.5) saturate(1)",
+      filter: "brightness(0.5) contrast(1.5) saturate(1)",
       backgroundSize: "120% 120%, 200% 200%, cover",
       backgroundPosition: "center center",
       backgroundBlendMode: "soft-light, difference",
@@ -248,6 +248,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                         id={`badge-tooltip-${name}-${i}`}
                         content={badge.tooltip}
                         place={"bottom"}
+                        className={"z-30"}
                       />
                     </Portal>
                   </div>

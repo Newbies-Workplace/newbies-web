@@ -2,8 +2,8 @@ import { ProjectCarousel } from "@/components/molecules/ProjectCarousel/ProjectC
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-import {getAllProjects, Project} from "@/utils/projects";
-import {ProjectCard} from "@/components/molecules/ProjectCard/ProjectCard";
+import { getAllProjects, Project } from "@/utils/projects";
+import { ProjectCard } from "@/components/molecules/ProjectCard/ProjectCard";
 
 export const OurProjectsSection = async () => {
   const projects: Project[] = await getAllProjects();
@@ -25,12 +25,14 @@ export const OurProjectsSection = async () => {
 
       <div
         className={
-          "flex flex-col items-center h-[calc(100vh-24px)] md:h-[calc(100vh-64px)] pb-4"
+          "flex flex-col items-center h-[calc(100vh-24px)] md:h-[calc(100vh-64px)] py-8"
         }
       >
         <div className={"h-full w-full max-w-[1200px]"}>
           <ProjectCarousel>
-            {projects.map((project) => <ProjectCard key={project.data.slug} project={project} />)}
+            {projects.map((project) => (
+              <ProjectCard key={project.data.slug} project={project} />
+            ))}
           </ProjectCarousel>
         </div>
       </div>

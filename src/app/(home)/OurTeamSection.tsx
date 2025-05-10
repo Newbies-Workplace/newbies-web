@@ -1,30 +1,45 @@
 "use client";
 
-import {CardDeck} from "@/components/molecules/TeamCard/CardDeck";
-import {TeamCard} from "@/components/molecules/TeamCard/TeamCard";
-import {teamMembers} from "@public/content/members/members";
-import React, {useEffect, useState} from "react";
-import {chunkArray} from "@/utils/chunk";
-import {AnimatePresence, motion, useAnimate, useInView} from "framer-motion";
+import { CardDeck } from "@/components/molecules/TeamCard/CardDeck";
+import { TeamCard } from "@/components/molecules/TeamCard/TeamCard";
+import { teamMembers } from "@public/content/members/members";
+import React, { useEffect, useState } from "react";
+import { chunkArray } from "@/utils/chunk";
+import { AnimatePresence, motion, useAnimate, useInView } from "framer-motion";
 import Marquee from "react-fast-marquee";
 
 export const OurTeamSection = () => {
-  const [scope, animate] = useAnimate()
+  const [scope, animate] = useAnimate();
   const ref = React.useRef(null);
   const inView = useInView(ref, {
     once: true,
-    margin: "-20px"
+    margin: "-20px",
   });
+  const [chunkSize, setChunkSize] = useState<number>(3);
   const [presentedCardName, setPresentedCardName] = useState<string>();
   const presentedMember = teamMembers.find(
     (member) => member.name === presentedCardName,
   );
 
   useEffect(() => {
+    const updateChunkSize = () => {
+      const width = window.innerWidth;
+      setChunkSize(width < 768 ? 1 : width < 1024 ? 2 : 3);
+    };
+
+    updateChunkSize();
+    window.addEventListener("resize", updateChunkSize);
+
+    return () => {
+      window.removeEventListener("resize", updateChunkSize);
+    };
+  }, []);
+
+  useEffect(() => {
     const slideInAmount = 100;
 
     if (inView) {
-      const items = document.querySelectorAll('.card-deck');
+      const items = document.querySelectorAll(".card-deck");
       items.forEach((item, index) => {
         animate(
           item,
@@ -42,7 +57,10 @@ export const OurTeamSection = () => {
   }, [inView, animate]);
 
   return (
-    <div ref={ref} className="min-h-screen bg-orange-900 bg-dot-white/[0.2] snap-start">
+    <div
+      ref={ref}
+      className="min-h-screen bg-orange-900 bg-dot-white/[0.2] snap-start"
+    >
       <div className={"-rotate-1 -mx-4"}>
         <Marquee
           direction="right"
@@ -64,14 +82,16 @@ export const OurTeamSection = () => {
           }
         >
           <div className={"flex flex-col justify-evenly items-center"}>
-            {chunkArray(teamMembers, 3).map((chunk, i) => {
+            {chunkArray(teamMembers, chunkSize).map((chunk, i) => {
               return (
                 <motion.div
                   className={"card-deck"}
                   layoutId={`team-card-deck-${i}`}
                   key={chunk.map((member) => member.name).join("-")}
-                  initial={{opacity: 0}}
-                  transition={{duration: 1}}>
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                >
                   <CardDeck>
                     {chunk.map((member) =>
                       presentedCardName !== member.name ? (
@@ -86,8 +106,7 @@ export const OurTeamSection = () => {
                           key={`${member.name}-placeholder`}
                           className={"opacity-0"}
                         >
-                          <TeamCard member={member} onClick={() => {
-                          }}/>
+                          <TeamCard member={member} onClick={() => {}} />
                         </div>
                       ),
                     )}
@@ -98,27 +117,28 @@ export const OurTeamSection = () => {
           </div>
         </div>
 
-        <AnimatePresence>
-          {presentedMember !== undefined && (
-            <motion.div
-              layout
-              layoutId={"backdrop"}
-              initial={{opacity: 0}}
-              animate={{opacity: 1}}
-              exit={{opacity: 0}}
-              className={"absolute w-screen h-screen left-0 top-0 bg-black/30"}
-              onClick={() => setPresentedCardName(undefined)}
+        {presentedMember !== undefined && (
+          <motion.div
+            layout
+            key={presentedMember.name}
+            layoutId={"backdrop"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={
+              "absolute w-screen h-screen left-0 top-0 bg-black/30 z-20"
+            }
+            onClick={() => setPresentedCardName(undefined)}
+          >
+            <div
+              className={
+                "size-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center overflow-hidden"
+              }
             >
-              <div
-                className={
-                  "size-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center overflow-hidden"
-                }
-              >
-                <TeamCard member={presentedMember} isPresented hidden={false}/>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <TeamCard member={presentedMember} isPresented hidden={false} />
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

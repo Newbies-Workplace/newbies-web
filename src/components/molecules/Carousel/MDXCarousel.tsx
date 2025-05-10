@@ -21,8 +21,8 @@ export const MDXCarousel = ({
           <CarouselItem
             key={image}
             className={cn(
-              "h-64 xl:h-[400px]",
-              ratio === "mobile" && "basis-1/2",
+              "max-h-64 xl:h-[400px]",
+              ratio === "mobile" && "basis-3/4",
             )}
           >
             <img
