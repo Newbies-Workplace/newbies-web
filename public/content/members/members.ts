@@ -45,6 +45,10 @@ const badges = {
     tooltip: "Prod breaker",
     img: "content/images/badge/prod-breaker.svg",
   },
+  unityBeliever: {
+    tooltip: "Unity believer",
+    img: "content/images/badge/unity-believer.svg",
+  },
 };
 
 const calculateLevel = (birthDate: string): number => {
@@ -85,7 +89,7 @@ export const teamMembers: TeamMember[] = [
       hp: 35,
       mana: 20,
     },
-    badges: [badges.jeteoHackathon, badges.practices],
+    badges: [badges.jeteoHackathon, badges.practices, badges.unityBeliever],
   },
   {
     name: "Rafał",
