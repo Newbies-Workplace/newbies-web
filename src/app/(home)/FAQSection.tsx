@@ -29,56 +29,30 @@ export const FaqSection = () => {
           }
         >
           <FaqItem
-            question="Jak do nas dołączyć?"
+            question="Jakie macie doświadczenie komercyjne"
             answer={
-              "Wystarczy że dołączysz na naszego discorda i pojawisz się na spotkaniu!\n\nTo takie proste...\n\nI nawet darmowe (uczciwa cena)"
+              "Część z nas na co dzień pracuje w korporacjach, wykonaliśmy również kilka projektów dla klientów zewnętrznych, ale przede wszystkim jesteśmy pasjonatami programowania, którzy chcą dzielić się swoją wiedzą i doświadczeniem z innymi!"
+            }
+          />
+          <FaqItem
+            question="Gdzie nas znaleźć?"
+            answer={
+              "Jesteśmy dostępni: " +
+              "\n - na discordzie" +
+              "\n - na Facebooku" +
+              "\n - na Discordzie" +
+              "\n - na platformie useme.com"
             }
           />
           <FaqItem
             question="Czy mogę u was zaliczyć praktyki?"
             answer={
-              <>
-                Tak, prowadzimy praktyki dla studentów oraz uczniów szkół
-                średnich. Wystarczy że zgłosisz się do nas na maila:{" "}
-                <a href={"mailto:praktyki@rst.com.pl"} className={"underline"}>
-                  praktyki@rst.com.pl
-                </a>
-                <br />
-                <br />
-                Praktyki prowadzimy projektowo - wybieramy projekty newbiesowe
-                do których możesz dołączyć i zdobywać doświadczenie. Jeśli
-                chętnych na dany termin jest więcej, to wymyślamy nowe projekty.
-                <br />
-                <br />
-                Oceniamy praktyki na podstawie zaangażowania, chęci nauki oraz
-                postępów w nauce. Wszystko zależy od Ciebie!
-              </>
+              "Nie, zakończyliśmy prowadzenie praktyk w 2025 roku.\nDziękujemy wam za dziesiątki wspólnie stworzonych projektów!"
             }
           />
           <FaqItem
             question="Skąd jesteście?"
-            answer={
-              "Newbies powstało w Świdnicy dzięki firmie RST, ale działamy online, więc możesz do nas dołączyć z każdego miejsca na ziemi!"
-            }
-          />
-          <FaqItem
-            question="Co to jest rekurencja?"
-            answer={
-              <FaqItem
-                question="Co to jest rekurencja?"
-                answer={
-                  <FaqItem
-                    question="Co to jest rekurencja?"
-                    answer={
-                      <FaqItem
-                        question="Co to jest rekurencja?"
-                        answer="Właśnie to jest rekurencja!"
-                      />
-                    }
-                  />
-                }
-              />
-            }
+            answer={"Newbies powstało w Świdnicy dzięki firmie RST Software."}
           />
         </div>
       </div>

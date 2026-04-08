@@ -25,7 +25,7 @@ interface TeamCardProps {
 export const TeamCard: React.FC<TeamCardProps> = ({
   hidden,
   isPresented,
-  member: { img, name, level, stats, badges },
+  member: { img, name, level, stats, badges, position: role },
   onClick,
 }) => {
   const cardRef = createRef<HTMLDivElement>();
@@ -191,16 +191,13 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             "absolute rounded-md bottom-2 left-2 right-2 flex flex-col gap-2 bg-orange-900/80 p-3"
           }
         >
-          <div className={"self-center"}>
+          <div className={"self-center flex flex-row"}>
             <span className={"font-bold text-xl select-none"}>{name}</span>
-            <span
-              className={cn(
-                isPresented ? "inline" : "sm:inline hidden",
-                "ml-2 text-xs",
-              )}
-            >
-              lvl {level}
-            </span>
+
+            <div className={"ml-2 flex flex-col"}>
+              <span className={cn("text-xs")}>lvl {level}</span>
+              <span className={cn("text-xs opacity-50")}>({role})</span>
+            </div>
           </div>
 
           <div

@@ -8,6 +8,7 @@ interface Badge {
 export interface TeamMember {
   name: string;
   level: number;
+  position: string;
   img: string;
   stats: {
     hp: number;
@@ -59,6 +60,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Wiktor",
     level: calculateLevel("2000-09-01"),
+    position: "Developer",
     img: "image/wiktor.png",
     stats: {
       hp: 20,
@@ -74,6 +76,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Kamil",
     level: calculateLevel("2000-06-01"),
+    position: "Tester",
     img: "image/kamil.png",
     stats: {
       hp: 35,
@@ -84,6 +87,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Oskar",
     level: calculateLevel("2004-08-01"),
+    position: "Developer",
     img: "image/oskar.png",
     stats: {
       hp: 35,
@@ -94,6 +98,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Rafał",
     level: calculateLevel("2004-08-01"),
+    position: "Developer",
     img: "image/rafal.png",
     stats: {
       hp: 21,
@@ -104,6 +109,7 @@ export const teamMembers: TeamMember[] = [
   {
     name: "Damian",
     level: calculateLevel("2003-04-01"),
+    position: "Designer",
     img: "image/damian.png",
     stats: {
       hp: 15,
