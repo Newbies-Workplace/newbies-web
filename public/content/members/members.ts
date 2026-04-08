@@ -111,19 +111,4 @@ export const teamMembers: TeamMember[] = [
     },
     badges: [badges.designer],
   },
-  {
-    name: "Piotr",
-    level: calculateLevel("2004-01-01"),
-    img: "image/piotr.png",
-    stats: {
-      hp: 69,
-      mana: 69,
-    },
-    badges: [
-      badges.jeteoHackathon,
-      badges.practices,
-      badges.retromachina,
-      badges.funny,
-    ],
-  },
 ];

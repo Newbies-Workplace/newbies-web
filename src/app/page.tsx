@@ -9,11 +9,11 @@ export default function Home() {
     <main className="h-screen w-screen overflow-x-hidden bg-blue-900 text-white snap-mandatory">
       <AboutUsSection />
 
-      <JoinUsSection />
-
       <OurProjectsSection />
 
       <OurTeamSection />
+
+      <JoinUsSection />
 
       <FaqSection />
     </main>
