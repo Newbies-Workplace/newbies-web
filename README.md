@@ -2,7 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Use Node.js 22.23.4 or a newer 22.x release. Version 22.23.4 includes the fix for [CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases).
+
+Select the project runtime and install dependencies:
+
+```bash
+nvm install
+nvm use
+npm ci
+```
+
+The Docker build and production stages use the same patched version. Rebuild and deploy the image to update the production runtime.
+
+Then, run the development server:
 
 ```bash
 npm run dev

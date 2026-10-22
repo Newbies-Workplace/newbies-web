@@ -1,4 +1,4 @@
-FROM node:22 AS builder
+FROM node:22.23.4 AS builder
 
 # Create build directory
 WORKDIR /build
@@ -9,7 +9,7 @@ COPY . ./
 RUN npm ci
 RUN npm run build
 
-FROM node:22-alpine
+FROM node:22.23.4-alpine
 WORKDIR /app
 
 ENV NODE_ENV production
